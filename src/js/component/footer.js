@@ -4,7 +4,7 @@ export const Footer = () => (
 <div>
 		<section class="test">
 
-  <footer class="text-center text-white" style={{backgroundColor: "darkgray"}}>
+  <footer class="text-center text-white bg-dark">
   
     <div class="container p-4 pb-0">
   

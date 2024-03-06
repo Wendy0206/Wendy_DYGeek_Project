@@ -1,43 +1,40 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import rigoImage from "../../img/rigo-baby.jpg";
 
 import { Context } from "../store/appContext";
 
 import "../../styles/demo.css";
 
-export const Demo = () => {
-	const { store, actions } = useContext(Context);
 
+
+export const Demo = () => {
+const location =useLocation();
+const data = location.state;
 	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
+		<div className="container ">
+			<div className="back_home">
 			<Link to="/">
 				<button className="btn btn-primary">Back home</button>
 			</Link>
+			</div>
+				<div class="card" style={{width: "50rem"}}>
+			<img src={rigoImage} class="card-img-top" alt="..."/>
+			<div class="card-body">
+			  <h5 class="card-title">{data.name}</h5>
+			  <p> Gender : {data.gender}<br/>
+			 
+			 Hair-Color : {data.hair_color}<br/>
+			 Eye-Color : {data.eye_Color}</p>
+		<div className="learn_like">
+		<button class="btn btn-outline-primary" >Learn More</button>
+		<span><i class="fa-regular fa-heart fa-xl"></i></span>
+			  </div>
+			</div>
+		  </div>
+
+			
 		</div>
 	);
 };
