@@ -1,0 +1,22 @@
+.list_div{
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    width: 100%;
+  
+    gap: 10px;;
+}
+
+.learn_like{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.star_img{
+    width: 80%;
+    height: 200px;
+    position: relative;
+    margin-top:-30px;
+}
+
