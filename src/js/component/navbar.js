@@ -9,8 +9,8 @@ export const Navbar = () => {
 		<div className=" text-light pt-2" style={{backgroundColor:"black"}}>
 			<div className="row pt-2 " style={{backgroundColor:"black"}}>
 				
-				<div className="col">
-					<nav class="navbar navbar-light " style={{backgroundColor:"black"}}>
+				<div className="col pl-4">
+					<nav class="navbar navbar-light  " style={{backgroundColor:"black"}}>
 						<a><i class="fa-brands fa-tiktok fa-xl"></i></a>
 						<a><i class="fa-brands fa-instagram fa-xl"></i></a>
 						<a><i class="fa-brands fa-facebook"></i></a>
@@ -24,7 +24,7 @@ export const Navbar = () => {
 						</div>
 						<div className="col-1">
 
-							<button class="btn btn-outline-light mr-0" type="submit"><i class="fa-regular fa-user"></i> LOG IN</button>
+							<button class="btn btn-outline-light " type="submit"><i class="fa-regular fa-user"></i> LOG IN</button>
 
 						</div>
 					</nav>

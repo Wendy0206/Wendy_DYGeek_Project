@@ -9,7 +9,7 @@ export const Home = () =>{
 
 
 	useEffect(() => {
-        fetch('https://swapi.dev/api/people/')
+        fetch('https://api.attackontitanapi.com/titans')
             .then(response => {
                 if (!response.ok) {
                     throw Error(response.statusText);
@@ -35,13 +35,14 @@ return (
 	<div className="list_div">
 		{listC.map((element, index)=>
 			<div key={index} class="card" style={{width: "15rem"}}>
-			<img src={rigoImage} class="card-img-top" alt="..."/>
+				<Link to={`/demo/${element.name}`} state={element}><img src={element.img} class="card-img-top" alt="..."/> </Link>
+			
 			<div class="card-body">
 			  <h5 class="card-title">{element.name}</h5>
-			  <p> Gender : {element.gender}<br/>
+			  <p> Gender : Male <br/>
 			 
-		Hair-Color : {element.hair_color}<br/>
-		Eye-Color : {element.eye_color}</p>
+		Hair-Color : Black<br/>
+		Eye-Color :Brown</p>
 
 		<div className="learn_like">
 		<Link to={`/demo/${element.name}`} state={element}> <button class="btn btn-outline-primary" >Learn More</button></Link>

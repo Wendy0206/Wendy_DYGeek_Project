@@ -1,5 +1,13 @@
 .back_home{
     position: relative;
-    margin-right:20px;
-    margin-top: 20px;
+    margin-left:-380px;
+    margin-top: 0px;
+}
+
+.demo_div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    margin: auto;
 }
