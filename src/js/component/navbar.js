@@ -24,7 +24,7 @@ export const Navbar = () => {
 						</div>
 						<div className="col-1">
 
-							<button class="btn btn-outline-secondary mr-0" type="submit">Search</button>
+							<button class="btn btn-outline-light mr-0" type="submit"><i class="fa-regular fa-user"></i> LOG IN</button>
 
 						</div>
 					</nav>
@@ -52,12 +52,12 @@ export const Navbar = () => {
 							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 						<div class="navbar-nav ">
 
-									<a class="nav-link active " aria-current="page" href="#">News</a>
-									<a class="nav-link" href="#">Video</a>
-									<a class="nav-link " href="#">film</a>
-									<a class="nav-link " href="#">Series</a>
-									<a class="nav-link " href="#">Game</a>
-									<a class="nav-link " href="#">Disney</a>
+									<a class="nav-link text-secondary active " aria-current="page" href="#">News</a>
+									<a class="nav-link  text-secondary" href="#">Video</a>
+									<a class="nav-link  text-secondary " href="#">film</a>
+									<a class="nav-link  text-secondary " href="#">Series</a>
+									<a class="nav-link  text-secondary" href="#">Game</a>
+									<a class="nav-link text-secondary " href="#">Disney</a>
 
 								</div>
 								
