@@ -12,14 +12,6 @@ export const Single = () =>{
 	
 	const context= useContext(AppContext);
 	const navigate = useNavigate();
-	useEffect(() => {
-		if(context.favList==0){
- navigate("/");
-		}
- 
-	 }, [context.favList]);
-	 
- 
 	
 
 	function deletefavorite(pos){

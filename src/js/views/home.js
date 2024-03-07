@@ -43,7 +43,7 @@ return (
 <div className="container">
 			<div className="seefavorite">
 			<Link to="/single">
-			<button class="back_button" >Favorites</button>
+			<button class="back_button" >Favorites <span className="suptest">{context.favList.length}</span> </button>
 			</Link>
 			</div>
 	<div className="list_div">
@@ -58,9 +58,10 @@ return (
 		Hair-Color : Black<br/>
 		Eye-Color :Brown</p>
 
+		
 		<div className="learn_like">
 		<Link to={`/demo/${element.name}`} state={element}> <button class="learn_button" >Learn More</button></Link>
-		<span onClick={()=> addFavorite(index)}><i id="liketest"  class="fa-regular fa-thumbs-up fa-beat fa-xl"></i></span>
+		<span onClick={()=> addFavorite(index)}><i id="liketest"  class="fa-regular fa-heart fa-beat fa-xl"></i></span>
 			  </div>
 			</div>
 		  </div>
