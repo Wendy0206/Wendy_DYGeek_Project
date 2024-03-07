@@ -2,14 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import imglink from "../../img/star_wars.png";
 import rigoImage from "../../img/rigo-baby.jpg"
+import "../../styles/home.css";
 
 export const Navbar = () => {
 	return (
-		<div className=" text-light  pt-3 " style={{backgroundColor:"black"}}>
-			<div className="row ml-2 " style={{backgroundColor:"black"}}>
-				<div className="col ml-4">
-					<nav class="navbar navbar-light justify-content-between" style={{backgroundColor:"black"}}>
-						<a ><i class="fa-brands fa-tiktok fa-xl"></i></a>
+		<div className=" text-light pt-2" style={{backgroundColor:"black"}}>
+			<div className="row pt-2 " style={{backgroundColor:"black"}}>
+				
+				<div className="col">
+					<nav class="navbar navbar-light " style={{backgroundColor:"black"}}>
+						<a><i class="fa-brands fa-tiktok fa-xl"></i></a>
 						<a><i class="fa-brands fa-instagram fa-xl"></i></a>
 						<a><i class="fa-brands fa-facebook"></i></a>
 						<a><i class="fa-brands fa-x-twitter fa-xl"></i></a> 
@@ -43,26 +45,27 @@ export const Navbar = () => {
 			</div>
 
 			<div className="row dark">
-				<div className="col-4"></div>
-				<div className="col-4 mt-4">
-					<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						<div class="container-fluid">
+				<div className="col"></div>
+				<div className="col ">
+					<nav class="navbar navbar-expand-lg d-flex justif-content-between">
+					
 							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-								<div class="navbar-nav">
-									<a class="nav-link active text-secondary" aria-current="page" href="#">News</a>
-									<a class="nav-link text-secondary" href="#">Video</a>
-									<a class="nav-link text-secondary" href="#">film</a>
-									<a class="nav-link text-secondary" href="#">Series</a>
-									<a class="nav-link text-secondary" href="#">Game</a>
-									<a class="nav-link text-secondary" href="#">Disney</a>
+						<div class="navbar-nav ">
+
+									<a class="nav-link active " aria-current="page" href="#">News</a>
+									<a class="nav-link" href="#">Video</a>
+									<a class="nav-link " href="#">film</a>
+									<a class="nav-link " href="#">Series</a>
+									<a class="nav-link " href="#">Game</a>
+									<a class="nav-link " href="#">Disney</a>
 
 								</div>
-								<hr/>
+								
 							</div>
-						</div>
+					
 					</nav>
 				</div>
-				<div className="col-4"></div>
+				<div className="col"></div>
 
 			</div>
 		</div>

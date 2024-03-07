@@ -41,7 +41,7 @@ return (
 			  <p> Gender : {element.gender}<br/>
 			 
 		Hair-Color : {element.hair_color}<br/>
-		Eye-Color : {element.eye_Color}</p>
+		Eye-Color : {element.eye_color}</p>
 
 		<div className="learn_like">
 		<Link to={`/demo/${element.name}`} state={element}> <button class="btn btn-outline-primary" >Learn More</button></Link>

@@ -27,7 +27,7 @@ const data = location.state;
 			  <p> Gender : {data.gender}<br/>
 			 
 			 Hair-Color : {data.hair_color}<br/>
-			 Eye-Color : {data.eye_Color}</p>
+			 Eye-Color : {data.eye_color}</p>
 		<div className="learn_like">
 		<button class="btn btn-outline-primary" >Learn More</button>
 		<span><i class="fa-regular fa-heart fa-xl"></i></span>
