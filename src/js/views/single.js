@@ -15,13 +15,12 @@ export const Single = () =>{
 	
 
 	function deletefavorite(pos){
-	
 		let newArray= context.favList.filter((element,index)=> index!=pos);
-		context.setFavList(newArray);
-		console.log('after deletion ', newArray);
-		
+		context.setFavList(newArray);	
 	}
 
+	
+	
 
 
 return (
@@ -49,6 +48,7 @@ return (
 		<div className="learn_like">
 		<Link to={`/demo/${element.name}`}> <button class="btn btn-outline-primary" >Learn More</button></Link>
 		<span onClick={()=> deletefavorite(index)}><i class="fa-solid fa-trash fa-bounce"></i></span>
+		
 			  </div>
 			</div>
 		  </div>

@@ -1,5 +1,4 @@
 
-
 .list_div{
     display: inline-flex;
     justify-content: space-between;
@@ -10,21 +9,23 @@
   
 }
 
-img{
+.testred{
+  color:red;
+  -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: red;
+}
+
+img,i,span{
     cursor: pointer;
 }
 
-i{
-    cursor: pointer;
-}
+
 div> a{
     margin-left: 10px;
     font-size: 30px;
     font-weight: 150px;
   
 }
-
-
 
 
 .learn_like{
@@ -38,9 +39,7 @@ div> a{
     position: relative;
     margin-top:-30px;
 }
-span{
-    cursor: pointer;
-}
+
 
 .suptest{
     position: relative;
@@ -121,16 +120,16 @@ span{
   font-size: 18px;
 }
 
-.button-30:focus {
+.learn_button:focus {
   box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
-.button-30:hover {
+.learn_button:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
-.button-30:active {
+.learn_button:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
 }
