@@ -1,12 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link, useParams } from "react-router-dom";
+import { AppContext } from "../layout";
 
 export const Home = () =>{
-	const [listC, setListC] = useState([]);
-
+	
+	const context= useContext(AppContext);
 
 	useEffect(() => {
         fetch('https://api.attackontitanapi.com/titans')
@@ -20,7 +21,7 @@ export const Home = () =>{
             .then(responseAsJson => {
                 // Do stuff with the JSONified response
               //  console.log(responseAsJson);
-                setListC(responseAsJson.results);
+               context.setListC(responseAsJson.results);
             })
             .catch(error => {
                 console.log('Looks like there was a problem: \n', error);
@@ -29,11 +30,24 @@ export const Home = () =>{
     }, []);
 
 
+
+	function addFavorite(pos){
+		let newArray= [...context.favList];
+		newArray.push(context.listC[pos]);
+		context.setFavList(newArray);
+		
+	}
+
 return (
 
-
+<div className="container">
+			<div className="seefavorite">
+			<Link to="/single">
+			<button type="button" class="btn btn-secondary">Favorite</button>
+			</Link>
+			</div>
 	<div className="list_div">
-		{listC.map((element, index)=>
+		{context.listC.map((element, index)=>
 			<div key={index} class="card" style={{width: "15rem"}}>
 				<Link to={`/demo/${element.name}`} state={element}><img src={element.img} class="card-img-top" alt="..."/> </Link>
 			
@@ -45,12 +59,13 @@ return (
 		Eye-Color :Brown</p>
 
 		<div className="learn_like">
-		<Link to={`/demo/${element.name}`} state={element}> <button class="btn btn-outline-primary" >Learn More</button></Link>
-		<span><i class="fa-regular fa-heart fa-xl"></i></span>
+		<Link to={`/demo/${element.name}`} > <button class="btn btn-outline-primary" >Learn More</button></Link>
+		<span onClick={()=> addFavorite(index)}><i  class="fa-regular fa-heart fa-beat fa-xl"></i></span>
 			  </div>
 			</div>
 		  </div>
 		)}
+	</div>
 	</div>
 );
 	}
