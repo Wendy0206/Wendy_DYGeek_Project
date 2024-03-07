@@ -6,15 +6,24 @@ import "../../styles/home.css";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../layout";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Single = () =>{
 	
 	const context= useContext(AppContext);
-
+	const navigate = useNavigate();
+	useEffect(() => {
+		if(context.favList==0){
+ navigate("/");
+		}
+ 
+	 }, [context.favList]);
+	 
+ 
 	
 
 	function deletefavorite(pos){
-	//	console.log('before deletion ',newArray);
+	
 		let newArray= context.favList.filter((element,index)=> index!=pos);
 		context.setFavList(newArray);
 		console.log('after deletion ', newArray);
@@ -29,7 +38,7 @@ return (
 <div className="demo_div ">
 			<div className="back_home">
 			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
+				<button className="back_button">Back home</button>
 			</Link>
 			</div>
 

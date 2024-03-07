@@ -43,7 +43,7 @@ return (
 <div className="container">
 			<div className="seefavorite">
 			<Link to="/single">
-			<button type="button" class="btn btn-secondary">Favorite</button>
+			<button class="back_button" >Favorites</button>
 			</Link>
 			</div>
 	<div className="list_div">
@@ -59,8 +59,8 @@ return (
 		Eye-Color :Brown</p>
 
 		<div className="learn_like">
-		<Link to={`/demo/${element.name}`} > <button class="btn btn-outline-primary" >Learn More</button></Link>
-		<span onClick={()=> addFavorite(index)}><i  class="fa-regular fa-heart fa-beat fa-xl"></i></span>
+		<Link to={`/demo/${element.name}`} state={element}> <button class="learn_button" >Learn More</button></Link>
+		<span onClick={()=> addFavorite(index)}><i id="liketest"  class="fa-regular fa-thumbs-up fa-beat fa-xl"></i></span>
 			  </div>
 			</div>
 		  </div>
