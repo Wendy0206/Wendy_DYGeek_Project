@@ -31,11 +31,21 @@ export const Home = () => {
 
 
 
-	function addFavorite(pos,el) {
-		let newArray = [...context.favList];
-		el.target.classList.add('testred');
-		newArray.push(context.listC[pos]);
-		context.setFavList(newArray);
+	function addFavorite(elm, pos,el) {
+		let newArray2 = context.favList.find((element) => element==elm);
+
+		if(!newArray2){
+			let newArray = [...context.favList];
+			el.target.classList.add('testred');
+			newArray.push(context.listC[pos]);
+			context.setFavList(newArray);
+		}
+		else{
+			let newArray= context.favList.filter((element,index)=> index!=pos);
+			context.setFavList(newArray);
+			el.target.classList.remove("testred");	
+		}
+		
 
 	}
 
@@ -64,7 +74,7 @@ export const Home = () => {
 
 							<div className="learn_like">
 								<Link to={`/demo/${element.name}`} state={element}> <button class="learn_button" >Learn More</button></Link>
-								<span onClick={(e) => addFavorite(index,e)}><i id="liketest" class="fa-regular fa-heart fa-beat fa-xl"></i></span>
+								<span onClick={(e) => addFavorite(element, index,e)}><i id="liketest" class="fa-regular fa-heart fa-beat fa-xl"></i></span>
 								
 							</div>
 						</div>
