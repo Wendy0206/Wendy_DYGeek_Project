@@ -6,10 +6,10 @@ import "../../styles/home.css";
 
 export const Navbar = () => {
 	return (
-		<div className=" text-light pt-2" style={{backgroundColor:"black"}}>
+		<div className=" text-light pt-2 px-4" style={{backgroundColor:"black"}}>
 			<div className="row pt-2 " style={{backgroundColor:"black"}}>
 				
-				<div className="col ps-5">
+				<div className="col ps-5-3">
 					<nav class="navbar navbar-light pl-4 " style={{backgroundColor:"black"}}>
 						<a><i class="fa-brands fa-tiktok fa-xl"></i></a>
 						<a><i class="fa-brands fa-instagram fa-xl"></i></a>
