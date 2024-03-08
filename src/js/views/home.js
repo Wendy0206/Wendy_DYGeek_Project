@@ -31,7 +31,7 @@ export const Home = () => {
 
 
 
-	function addFavorite(elm, pos,el) {
+	function addFavorite(elm,pos,el) {
 		let newArray2 = context.favList.find((element) => element==elm);
 
 		if(!newArray2){
@@ -41,7 +41,8 @@ export const Home = () => {
 			context.setFavList(newArray);
 		}
 		else{
-			let newArray= context.favList.filter((element,index)=> index!=pos);
+			
+			let newArray= context.favList.filter((element,index)=> element!=elm);
 			context.setFavList(newArray);
 			el.target.classList.remove("testred");	
 		}
