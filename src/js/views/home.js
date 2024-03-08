@@ -31,7 +31,7 @@ export const Home = () => {
 
 
 
-	function addFavorite(elm,pos,el) {
+	function addFavorite(elm,pos) {
 		let newArray2 = context.favList.find((element) => element==elm);
 
 		if(!newArray2){

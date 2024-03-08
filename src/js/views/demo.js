@@ -13,6 +13,13 @@ import "../../styles/demo.css";
 export const Demo = () => {
 const location =useLocation();
 const data = location.state;
+
+
+
+
+
+
+
 	return (
 		<div className="demo_div ">
 			<div className="back_home">
