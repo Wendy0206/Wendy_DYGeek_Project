@@ -8,6 +8,8 @@ import { AppContext } from "../layout";
 export const Login = () => {
     const [userN, setUserN] = useState('')
     const [userP, setUserP] = useState('')
+    const [logInfo, setLogInfo] = useState([])
+
     const context = useContext(AppContext);
 
     useEffect(() => {
@@ -28,29 +30,33 @@ export const Login = () => {
 
     function login_function() {
 
-        if (userN.length > 5 && userP > 7) {
+        if (userN.length > 5 && userP.length > 5) {
 
-
-            fetch('https://api.attackontitanapi.com/characters')
-                .then(response => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    // Read the response as JSON
-                    return response.json();
+        let test= [userN,userP]
+      
+        
+        fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/login', {
+                method: 'post', // or 'POST'
+                body: JSON.stringify(test), // data can be a 'string' or an {object} which comes from somewhere further above in our application
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => {
+                    if (!res.ok) throw Error(res.statusText);
+                    return res.json();
                 })
-                .then(responseAsJson => {
-                    // Do stuff with the JSONified response
-
-                    context.setCurrentUser(responseAsJson.results);
-                })
-                .catch(error => {
-                    console.log('Looks like there was a problem: \n', error);
-                });
+                .then(response => context.setCurrentUser(response) )
+                .catch(error => console.error(error));
+    
+               
+           
         }
 
         else {
             alert('Please enter a valid username and/or password')
+            setUserN('')
+            setUserP('')
         }
     }
 
@@ -59,10 +65,10 @@ export const Login = () => {
     return (
 
         <div className="container">
-            <form>
+       
                 <h3>Login Here</h3>
 
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input type="text" placeholder="Email or Phone" value={context.userP} id="username" onChange={(e) => get_username(e)} />
 
                 <label for="password">Password</label>
@@ -73,7 +79,7 @@ export const Login = () => {
                     <div class="go"><i class="fab fa-google"></i>  Google</div>
                     <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
                 </div>
-            </form>
+          
 
         </div>
     );
