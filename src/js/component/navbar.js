@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import imglink from "../../img/star_wars.png";
 import rigoImage from "../../img/rigo-baby.jpg"
@@ -23,9 +24,9 @@ export const Navbar = () => {
 
 						</div>
 						<div className="col-1">
-
+                             <Link to="/login" >
 							<button class="btn btn-outline-light " type="submit"><i class="fa-regular fa-user"></i> LOG IN</button>
-
+							</Link>
 						</div>
 					</nav>
 				</div>

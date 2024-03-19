@@ -9,6 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Login } from "./views/login";
 
 
 
@@ -21,6 +22,8 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const [listC, setListC] = useState([]);
 	const [favList, setFavList] = useState([]);
+	const [currentUser, setCurrentUser] = useState(0);
+
 
 	return (
 		<div>
@@ -28,13 +31,17 @@ const Layout = () => {
 				listC,
 				setListC,
 				favList,
-				setFavList
+				setFavList,
+				currentUser,
+				setCurrentUser
 			}} >
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
-					<Routes>
-					<Route path="/" element={<Home />} />
+					<Routes>			
+					<Route path="/" element={<Home />}/>
+					<Route path="/login" element={<Login/>} />
+
 						<Route path="/demo/:ind" element={<Demo />} />
 						<Route path="/single" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
