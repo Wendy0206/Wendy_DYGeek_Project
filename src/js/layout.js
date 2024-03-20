@@ -22,7 +22,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const [listC, setListC] = useState([]);
 	const [favList, setFavList] = useState([]);
-	const [currentUser, setCurrentUser] = useState(0);
+	const [currentUser, setCurrentUser] = useState([0,'  Log in']);
 
 
 	return (

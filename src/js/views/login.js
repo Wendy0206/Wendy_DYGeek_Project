@@ -2,14 +2,14 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/login.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const Login = () => {
     const [userN, setUserN] = useState('')
     const [userP, setUserP] = useState('')
     const [logInfo, setLogInfo] = useState([])
-
+    const navigate = useNavigate();
     const context = useContext(AppContext);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export const Login = () => {
         
         fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/login', {
                 method: 'post', // or 'POST'
-                body: JSON.stringify(test), // data can be a 'string' or an {object} which comes from somewhere further above in our application
+                body: JSON.stringify(test), 
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -46,10 +46,14 @@ export const Login = () => {
                     if (!res.ok) throw Error(res.statusText);
                     return res.json();
                 })
-                .then(response => context.setCurrentUser(response) )
-                .catch(error => console.error(error));
+                .then(response => {
+                    context.setCurrentUser(response);
+                    navigate('/')
+                
+                } )
+                .catch(error => alert(error));
     
-               
+        //     
            
         }
 
@@ -67,20 +71,20 @@ export const Login = () => {
         <div className="container">
        
                 <h3>Login Here</h3>
-
+         
                 <label htmlFor="username">Username</label>
-                <input type="text" placeholder="Email or Phone" value={context.userP} id="username" onChange={(e) => get_username(e)} />
+                <input type="text" placeholder="Email or Phone" value={userN} id="username" onChange={(e) => get_username(e)} />
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="Password" value={context.userP} id="password" onChange={(e) => get_password(e)} />
+                <input type="password" placeholder="Password" value={userP} id="password" onChange={(e) => get_password(e)} />
 
                 <button onClick={() => login_function()}>Log In</button>
                 <div class="social">
                     <div class="go"><i class="fab fa-google"></i>  Google</div>
                     <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
                 </div>
-          
-
+            
+              
         </div>
     );
 }

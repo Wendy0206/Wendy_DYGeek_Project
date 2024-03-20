@@ -1,11 +1,13 @@
 import React from "react";
-
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import imglink from "../../img/star_wars.png";
 import rigoImage from "../../img/rigo-baby.jpg"
 import "../../styles/home.css";
+import { AppContext } from "../layout";
 
 export const Navbar = () => {
+	const context = useContext(AppContext);
 	return (
 		<div className=" text-light pt-2 px-4" style={{backgroundColor:"black"}}>
 			<div className="row pt-2 " style={{backgroundColor:"black"}}>
@@ -23,9 +25,9 @@ export const Navbar = () => {
 							<input class="form-control mr-m-6 w-100" type="search" placeholder="Search" aria-label="Search" />
 
 						</div>
-						<div className="col-1">
+						<div className="col-1 " id="log_div" >
                              <Link to="/login" >
-							<button class="btn btn-outline-light " type="submit"><i class="fa-regular fa-user"></i> LOG IN</button>
+							<button class="btn btn-outline-light " type="submit"><i class="fa-regular fa-user"></i>{context.currentUser[1]}</button>
 							</Link>
 						</div>
 					</nav>
