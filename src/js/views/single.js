@@ -14,6 +14,59 @@ export const Single = () =>{
 	const navigate = useNavigate();
 	
 
+	useEffect(() => {
+		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+context.currentUser.id+'/favorite')              
+		.then(res => {
+			if (!res.ok) throw Error(res.statusText);
+			return res.json();
+		})
+		.then(response => {
+
+		let test= [...response]
+		
+		let test2=[]
+		for(let i=0;i<test.length;i++){
+		test2.push(context.listC[test[i]])
+		}
+
+		context.setFavList(test2)
+		
+		
+		
+	
+		} )
+
+		.catch(error => alert(error));  
+
+	}, []);
+
+	// function getFavforUser(){
+	//     fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+context.currentUser.id+'/favorite')              
+    //             .then(res => {
+    //                 if (!res.ok) throw Error(res.statusText);
+    //                 return res.json();
+    //             })
+    //             .then(response => {
+
+	// 			let test= [...response]
+				
+	// 			let test2=[]
+	// 			for(let i=0;i<test.length;i++){
+    //             test2.push(context.listC[test[i]])
+	// 			}
+
+	// 			context.setFavList(test2)
+				
+                
+				
+			
+    //             } )
+
+    //             .catch(error => alert(error));    
+           
+    //     }
+
+
 	function deletefavorite(pos){
 		let newArray= context.favList.filter((element,index)=> index!=pos);
 		context.setFavList(newArray);	

@@ -36,7 +36,7 @@ export const Login = () => {
       
         
         fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/login', {
-                method: 'post', // or 'POST'
+                method: 'POST',
                 body: JSON.stringify(test), 
                 headers: {
                     'Content-Type': 'application/json'
@@ -51,9 +51,7 @@ export const Login = () => {
                     navigate('/')
                 
                 } )
-                .catch(error => alert(error));
-    
-        //     
+                .catch(error => alert(error));    
            
         }
 

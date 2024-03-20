@@ -20,14 +20,24 @@ export const Home = () => {
 			})
 			.then(responseAsJson => {
 				// Do stuff with the JSONified response
-				//  console.log(responseAsJson);
+			
 				context.setListC(responseAsJson.results);
+                if (context.currentUser.id!=null){
+					
+				}
+		
+
 			})
 			.catch(error => {
 				console.log('Looks like there was a problem: \n', error);
 			});
 
 	}, []);
+
+	
+		
+
+
 
 
 
