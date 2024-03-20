@@ -20,22 +20,63 @@ export const Home = () => {
 			})
 			.then(responseAsJson => {
 				// Do stuff with the JSONified response
-			
-				context.setListC(responseAsJson.results);
-                if (context.currentUser.id!=null){
-					
-				}
-		
+			     let test=[]
+				 let final=[]
+				
+				
+				 test=[...responseAsJson.results];
+				test.forEach((elm)=>{
+                
+					let test2= {
+						id: elm.id,
+						name: elm.name,
+						img: elm.img
+					 }
+					 final.push(test2)
+				})
+				context.setListC(final);
+				
 
 			})
 			.catch(error => {
 				console.log('Looks like there was a problem: \n', error);
 			});
+			if(context.currentUser!=null){
+				getFavofUser();
 
-	}, []);
-
-	
+			}
 		
+	}, [context.currentUser]);
+
+
+	function getFavofUser(){
+		console.log('test')
+		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+context.currentUser.id+'/favorite')              
+		.then(res => {
+			if (!res.ok) throw Error(res.statusText);
+			return res.json();
+		})
+		.then(response => {
+
+		let test= [...response]
+		let test2={}
+		let final=[]
+		
+	        test.forEach ((elm)=>{
+
+			test2=context.listC[elm.people_id];
+			
+				final.push(test2)	;
+
+		})
+		context.setFavList(final)
+
+
+		} )
+
+		.catch(error => alert(error));  
+	}
+
 
 
 
@@ -49,6 +90,7 @@ export const Home = () => {
 	
 			newArray.push(context.listC[pos]);
 			context.setFavList(newArray);
+
 		}
 		else{
 			
@@ -59,6 +101,8 @@ export const Home = () => {
 		
 
 	}
+
+
 
 
 	
