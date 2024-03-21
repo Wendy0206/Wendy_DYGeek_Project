@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useNavigate  } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
@@ -13,31 +13,28 @@ export const Single = () => {
 
 	useEffect(() => {
 
-		console.log('test')
-		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+context.currentUser.id+'/favorite')              
-		.then(res => {
-			if (!res.ok) throw Error(res.statusText);
-			return res.json();
-		})
-		.then(response => {
+		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/' + context.currentUser.id + '/favorite')
+			.then(res => {
+				if (!res.ok) throw Error(res.statusText);
+				return res.json();
+			})
+			.then(response => {
 
-		let test= [...response]
-		let test2={}
-		let final=[]
-		
-	        test.forEach ((elm)=>{
+				let test = [...response]
+				let test2 = []
+				let final = []
 
-			test2=context.listC[elm.people_id];
-			
-				final.push(test2)	;
+				test.forEach((elm) => {
+					let test2 = context.listC.filter((el) => el.id == elm.people_id);
+					final = final.concat(test2)
 
-		})
-		context.setFavList(final)
+				})
+				context.setFavList(final)
 
 
-		} )
+			})
 
-		.catch(error => alert(error));  
+			.catch(error => alert(error));
 
 
 
@@ -48,21 +45,17 @@ export const Single = () => {
 
 
 
-	function deletefavorite(pos) {
-		let test = context.favList[pos];
-		console.log(context.favList[pos])
-		let test2 = context.listC.indexOf(test)
-		console.log(test2)
+	function deletefavorite(id) {
 		
-		// let newArray= context.favList.filter((element,index)=> index!=pos);
-		// context.setFavList(newArray);
-		//delete_fetch(test2);	
+		let newArray= context.favList.filter((el)=> el.id!=id);
+		context.setFavList(newArray);
+		//delete_fetch(id);	
 
 	}
 
 	function delete_fetch(fav) {
 		let test = [context.currentUser.id, fav]
-		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+context.currentUser.id +'/favorite/'+fav, {
+		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+ context.currentUser.id + '/favorite/' + fav, {
 			method: 'PUT',
 			body: JSON.stringify(test), // data can be a 'string' or an {object} which comes from somewhere further above in our application
 			headers: {
@@ -104,7 +97,7 @@ export const Single = () => {
 
 							<div className="learn_like">
 								<Link to={`/demo/${element.name}`}> <button className="btn btn-outline-primary" >Learn More</button></Link>
-								<span onClick={()=>deletefavorite(index)}><i className="fa-solid fa-trash fa-bounce"></i></span>
+								<span onClick={() => deletefavorite(element.id)}><i className="fa-solid fa-trash fa-bounce"></i></span>
 
 							</div>
 						</div>
