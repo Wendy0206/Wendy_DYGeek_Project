@@ -77,9 +77,9 @@ export const Login = () => {
                 <input type="password" placeholder="Password" value={userP} id="password" onChange={(e) => get_password(e)} />
 
                 <button onClick={() => login_function()}>Log In</button>
-                <div class="social">
-                    <div class="go"><i class="fab fa-google"></i>  Google</div>
-                    <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+                <div className="social">
+                    <div className="go"><i className="fab fa-google"></i>  Google</div>
+                    <div className="fb"><i className="fab fa-facebook"></i>  Facebook</div>
                 </div>
             
               
