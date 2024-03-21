@@ -21,6 +21,10 @@ body{
     position: absolute;
     border-radius: 50%;
 }
+
+#newaccount_text{
+    color:blue;
+}
 .shape:first-child{
     background: linear-gradient(
         #1845ad,
