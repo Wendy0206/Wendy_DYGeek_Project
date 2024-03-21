@@ -21,12 +21,14 @@ export const Single = () => {
 			.then(response => {
 
 				let test = [...response]
-				let test2 = []
+				
 				let final = []
 
-				test.forEach((elm) => {
-					let test2 = context.listC.filter((el) => el.id == elm.people_id);
+				test.forEach((elm,id) => {
+					console.log(test)
+					let test2 = context.listC.filter((el,id) => el.id == elm.people_id);
 					final = final.concat(test2)
+					
 
 				})
 				context.setFavList(final)
@@ -46,21 +48,17 @@ export const Single = () => {
 
 
 	function deletefavorite(id) {
-		
-		let newArray= context.favList.filter((el)=> el.id!=id);
+
+		let newArray = context.favList.filter((elm) => elm.id != id);
 		context.setFavList(newArray);
-		//delete_fetch(id);	
+		delete_fetch(id);
 
 	}
 
 	function delete_fetch(fav) {
-		let test = [context.currentUser.id, fav]
-		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/'+ context.currentUser.id + '/favorite/' + fav, {
-			method: 'PUT',
-			body: JSON.stringify(test), // data can be a 'string' or an {object} which comes from somewhere further above in our application
-			headers: {
-				'Content-Type': 'application/json'
-			}
+		let test = [context.currentUser.id,fav]
+		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/' + context.currentUser.id +'/favorite/'+fav, {
+			method: 'DELETE'
 		})
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
@@ -69,6 +67,7 @@ export const Single = () => {
 			.then(response => console.log('Success:', response))
 			.catch(error => console.error(error));
 	}
+
 
 
 

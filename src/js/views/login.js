@@ -30,7 +30,7 @@ export const Login = () => {
 
     function login_function() {
 
-        if (userN.length > 5 && userP.length > 5) {
+        if (userN.length > 5 && userP.length >5) {
 
         let test= [userN,userP]
       
