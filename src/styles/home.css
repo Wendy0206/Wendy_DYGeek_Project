@@ -9,8 +9,23 @@
   
 }
 
+.nothing_div{
+min-height: 60vh;
+width: 80%;
+margin: 0 auto;
+display: flex;
+align-items: center;
+}    
+
+.nav_test:hover{
+  color: white;
+  transform: scale(1,1);
+}
+
+
 #log_div{
   height: 50px;
+  margin-bottom: 35px;
 }
 .testred{
   color:red;
@@ -57,11 +72,6 @@ div> a{
     margin-top: 0px;
 }
 
-.seefavorite{
-    position: relative;
-    margin-left:1200px;
-}
-
 
 
 
@@ -91,7 +101,7 @@ div> a{
 
 
 /* CSS */
-.back_button {
+.back_button, .fav_button {
   align-items: center;
   appearance: none;
   background-color: #FCFCFD;

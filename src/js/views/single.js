@@ -36,7 +36,7 @@ export const Single = () => {
 
 			})
 
-			.catch(error => alert(error));
+			.catch(error => console.log(error));
 
 
 
@@ -73,8 +73,6 @@ export const Single = () => {
 
 
 	return (
-
-
 		<div className="demo_div ">
 			<div className="back_home">
 				<Link to="/">
@@ -83,7 +81,12 @@ export const Single = () => {
 			</div>
 
 			<div className="list_div">
-				{context.favList.map((element, index) =>
+
+			{context.favList.length < 1 ? <div className="nothing_div"><h1>There are no Active Favorite for your Search</h1></div>
+
+:
+
+				context.favList.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
 						<Link to={`/demo/${element.name}`} state={element}><img src={element.img} className="card-img-top" alt="..." /> </Link>
 

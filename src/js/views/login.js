@@ -27,21 +27,7 @@ export const Login = () => {
 
     }
 
-    function get_username(val) {
-        let test = val.target.value;
-        setUserU(test)
-    }
-
-    
-    function get_email(val) {
-        let test = val.target.value;
-        setUserN(test)
-    }
-
-    function get_password(val) {
-        let test = val.target.value;
-        setUserP(test)
-    }
+ 
 
 
     function login_function() {
@@ -123,23 +109,23 @@ function fetch_newUser(){
 
     return (
 
-        <div className="container">
+        <div className="container h-100">
        
                 <h3>Login Here</h3>
          
                 <form>
                 
                <label htmlFor="username" style={userLabel[0]=='Username'? {display:'none' } : {display:'block' }}>{userLabel[0]}</label>
-               <input type="" placeholder="username" style={userLabel[0]=='Username'? {display:'none' } : {display:'block' }} value={userU} id="username" onChange={(e) => get_username(e)} />
+               <input type="" placeholder="username" style={userLabel[0]=='Username'? {display:'none' } : {display:'block' }} value={userU} id="username" onChange={(e) => setUserU(e.target.value)} />
 
                 <label htmlFor="email">{userLabel[1]}</label>
-                <input type="text" placeholder="Email or Phone" value={userN} id="email" onChange={(e) => get_email(e)} />
+                <input type="text" placeholder="Email or Phone" value={userN} id="email" onChange={(e) =>  setUserN(e.target.value)} />
 
                 <label for="password">{userLabel[2]}</label>
-                <input type="password" placeholder="Password" value={userP} id="password" onChange={(e) => get_password(e)} />
+                <input type="password" placeholder="Password" value={userP} id="password" onChange={(e) => setUserP(e.target.value)} />
                
 
-                <button onClick={() => login_function()}>{userLabel[3]}</button>
+                <button className="login_button" onClick={() => login_function()}>{userLabel[3]}</button>
               <span onClick={()=>createNewUser()} id='newaccount_text'>  <p  >Don't have an account? click here</p></span>
                 <div className="social">
                     <div className="go"><i className="fab fa-google"></i>  Google</div>
