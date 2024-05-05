@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     margin-top: 15px;
     width: 100%;
-    gap: 10px;
+    gap: 20px;
   
 }
 
@@ -25,7 +25,7 @@ align-items: center;
 
 #log_div{
   height: 50px;
-  margin-bottom: 35px;
+margin-top: 10px;
 }
 .testred{
   color:red;
@@ -86,12 +86,10 @@ div> a{
   font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
   font-size: 16px;
   font-weight: bold;
-  line-height: 24px;
   opacity: 1;
   outline: 0 solid transparent;
   padding: 8px 18px;
-  user-select: none;
-  -webkit-user-select: none;
+
   touch-action: manipulation;
   width: fit-content;
   word-break: break-word;
@@ -111,18 +109,10 @@ div> a{
   box-sizing: border-box;
   color: #36395A;
   cursor: pointer;
-  display: inline-flex;
   font-family: "JetBrains Mono",monospace;
   height: 48px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
   transition: box-shadow .15s,transform .15s;
   user-select: none;
   -webkit-user-select: none;
@@ -144,4 +134,71 @@ div> a{
 .learn_button:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+
+
+
+
+@keyframes slideshow3__fade {
+  0% {
+    opacity: 0;
+    z-index: 2;
+  }
+  6.6666666667% {
+    opacity: 1;
+  }
+  26.6666666667% {
+    opacity: 1;
+  }
+  27.6666666667% {
+    opacity: 0;
+    z-index: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.slideshow3 {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 30px auto;
+ 
+}
+
+
+.slideshow3 img:not(:first-child) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  animation-duration: 10s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: slideshow3__fade;
+  animation-timing-function: ease-in;
+  transition: opacity 2s ease-in;
+}
+
+
+.slideshow3 img:nth-child(1) {
+  animation-delay: 0s;
+}
+.slideshow3 img:nth-child(2) {
+  animation-delay: 2s;
+}
+.slideshow3 img:nth-child(3) {
+  animation-delay: 4s;
+}
+.slideshow3 img:nth-child(4) {
+  animation-delay: 8s;
+}
+.slideshow3 img:nth-child(5) {
+  animation-delay: 10s;
+}
+.img_sl{
+width: 100%;
+height: 400px;;
 }

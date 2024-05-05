@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "../../styles/home.css";
 export const Footer = () => (
 <>
 
@@ -9,8 +9,8 @@ export const Footer = () => (
   
 
   
-    <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-      © 2020 Copyright:
+    <div className="text-center p-2" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+      © 2024 Copyright:
       <a className="text-white" href="https://mdbootstrap.com/">GeeksZ.com</a>
     </div>
   

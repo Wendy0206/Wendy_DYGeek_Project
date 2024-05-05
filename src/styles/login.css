@@ -1,9 +1,25 @@
-*:before,
+/* *:before,
 *:after{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+} */
+
+
+
+button, span{
+    cursor: pointer;
 }
+
+.login_div{
+position: relative;
+display: flex;
+justify-content: center;
+align-content: center;
+min-height: 70vh;
+
+}
+
 body{
     background-color: #080710;
 }
@@ -43,7 +59,8 @@ body{
     bottom: -80px;
 }
 form{
-    height: 520px;
+    margin-top: 10px;
+    height: fit-content;
     width: 400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -54,7 +71,7 @@ form{
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 20px 30px;
 }
 form *{
     font-family: 'Poppins',sans-serif;
@@ -91,12 +108,13 @@ input{
     color: #e5e5e5;
 }
 .login_button{
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
     font-size: 18px;
+    font-weight: bold;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
@@ -104,9 +122,9 @@ input{
 .social{
   margin-top: 30px;
   display: flex;
+  cursor: pointer;
 }
 .social div{
-  background: red;
   width: 150px;
   border-radius: 3px;
   padding: 5px 10px 10px 5px;

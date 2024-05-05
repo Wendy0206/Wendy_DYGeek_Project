@@ -11,7 +11,7 @@ export const Navbar = () => {
     const navigate= useNavigate();
 
 	return (
-		<div className=" text-light pt-2 px-4" style={{backgroundColor:"black"}}>
+		<div className=" text-light pt-2 px-4 mb-2" style={{backgroundColor:"black"}}>
 			<div className="row pt-2 " style={{backgroundColor:"black"}}>
 				
 				<div className="col ">
@@ -29,7 +29,7 @@ export const Navbar = () => {
 							<input className="form-control mr-m-6 w-100" type="search" placeholder="Search" aria-label="Search" />
 
 						</div>
-						<div className="col-1 " id="log_div" >
+						<div className="col-1 mt-3 ml3" id="log_div" >
                        
 							<button className="btn btn-outline-light " type="submit" onClick={()=> navigate('/login')}><i className="fa-regular fa-user"></i>{context.currentUser.user}</button>
 						
