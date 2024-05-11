@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
+
 import "../../styles/login.css";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";

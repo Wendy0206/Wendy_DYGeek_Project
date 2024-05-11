@@ -3,9 +3,11 @@ import { useState, useEffect, useContext } from "react";
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
-import image1 from '../../img/GeekZ.png';
-import image2 from '../../img/carousel.png';
-import image3 from '../../img/starwars.png';
+import image1 from '../../img/kaisen.webp';
+import image2 from '../../img/aot.jpg';
+import image3 from '../../img/yagami.jpg';
+import image4 from '../../img/rengoku.jpg';
+import image5 from '../../img/aot.jpg';
 
 export const Home = () => {
 
@@ -89,8 +91,8 @@ export const Home = () => {
 			.then(response => console.log('Success:', response))
 			.catch(error => console.error(error));
 
-
 	}
+
 
 	function fetch_remove_fav(fav) {
 		let testArray = [context.currentUser.id, fav];
@@ -159,28 +161,6 @@ export const Home = () => {
 	return (
 
 		<div className="container h-100">
-			
-			<div className="slideshow3">
-			
-
-
-
-
-				<img class="img_sl" src={image1} />
-
-				<img class=" img_sl" src={image2} />
-
-				<img class=" img_sl" src={image3} />
-				<img class="img_sl" src={image1} />
-				<img class=" img_sl" src={image2} />
-
-
-
-
-
-
-
-			</div>
 
 			<div className=" d-flex justify-content-between pt-2">
 				<div className="dropdown text-start ">
@@ -205,6 +185,17 @@ export const Home = () => {
 				<button className="fav_button" onClick={() => navigate("/single")}>Favorites <span className="suptest">{context.favList.length}</span> </button>
 
 			</div>
+
+			<div className="slideshow3">
+				<img class="img_sl" src={image1} />
+				<img class=" img_sl" src={image2} />
+				<img class=" img_sl" src={image3} />
+				<img class=" img_sl" src={image4} />
+				<img class=" img_sl" src={image5} />
+
+			</div>
+
+
 			<div className="list_div">
 
 

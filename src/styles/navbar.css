@@ -1,0 +1,43 @@
+.nav_test:hover {
+  color: white;
+  transform: scale(1, 1);
+}
+
+#log_div {
+  height: 50px;
+  margin-top: 10px;
+}
+
+
+.star_img {
+  width: 80%;
+  height: 120px;
+  position: relative;
+  margin-top: -30px;
+}
+
+
+.nav_test:hover {
+  transform: scale(1, 1);
+}
+
+.nav_test:hover {
+  color: white;
+  transform: scale(1.5);
+}
+
+ul {
+  display: flex;
+}
+
+ul>li {
+  color: darkgray;
+  list-style: none;
+  margin-right: 2.5em;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+nav>a {
+  color: inherit;
+}
