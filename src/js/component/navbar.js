@@ -12,33 +12,6 @@ export const Navbar = () => {
 
 
 
-function marvel_api (){
-
-	let testArray = [context.currentUser.id, fav];
-
-		console.log('char id to add ' + fav)
-		//fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
-			.then(res => {
-				if (!res.ok) throw Error(res.statusText);
-				return res.json();
-			})
-			.then(response => {
-				console.log('Success:', response.results)
-let newArray=[...response.results];
-console.log('Success:', newArray)
-let newArray2=[];
-newArray.map((elm)=>{
-let each_elm={}
-each_elm.name=elm.name;
-each_elm.id=elm.id;
-each_elm.image= elm.thumbnail.path+elm.thumbnail.extension;
-newArray2.push(each_elm);
-})
-
-
-			})
-			.catch(error => console.error(error));
-}
 
 
 
@@ -94,7 +67,7 @@ newArray2.push(each_elm);
 							<div className="navbar-nav">
 								<ul>
 									<li><span className="nav_link  nav_test" onClick={() => navigate('')}>News</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Characters</span></li>
+									<li><span className="nav_link nav_test" onClick={() => navigate('/characters')}>Characters</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Movies</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Series</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Events</span></li>
