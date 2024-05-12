@@ -9,6 +9,15 @@
   
 }
 
+
+.testred{
+color: red;
+}
+
+.catalog_div{
+  width: 90%;
+}
+
 .nothing_div{
 min-height: 60vh;
 width: 80%;
@@ -35,6 +44,7 @@ img,i,span{
     position: relative;
     bottom: 1ex; 
     font-size: 80%;
+    font-weight: 800;
     color: red;
     font-weight: bold;
 }
@@ -115,6 +125,7 @@ img,i,span{
   height: 800px;
   margin-top: 30px;
   margin-bottom: -400px;
+  border-radius: 5px;
  
 }
 

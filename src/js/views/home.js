@@ -1,8 +1,12 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
+
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
+
+import md5 from "md5";
+
 import image1 from '../../img/kaisen.webp';
 import image2 from '../../img/aot.jpg';
 import image3 from '../../img/yagami.jpg';
@@ -109,8 +113,6 @@ export const Home = () => {
 			})
 			.then(response => console.log('Success:', response))
 			.catch(error => console.error(error));
-
-
 	}
 
 
@@ -156,11 +158,14 @@ export const Home = () => {
 	}
 
 
-
+	function convertToMd5 () {
+        const hash = md5(inputValue);
+        setMd5Hash(hash);
+    };
 
 	return (
 
-		<div className="container h-100">
+		<div className="container catalog_div">
 
 			<div className=" d-flex justify-content-between pt-2">
 				<div className="dropdown text-start ">

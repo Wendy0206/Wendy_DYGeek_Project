@@ -112,13 +112,15 @@ export const Login = () => {
 
     }
 
+    function google_login_function(){
+
+
+    }
 
 
     return (
 
         <div className="login_div">
-
-
 
             <form>
                 <h3>Login Here</h3>
@@ -136,8 +138,8 @@ export const Login = () => {
                 <button className="login_button mb-2" onClick={() => login_function()}>{userLabel[3]}</button>
                 <span onClick={() => createNewUser()} id='newaccount_text'>  <p>{userLabel[4]}</p></span>
                 <div className="social">
-                    <div className="go"><i className="fab fa-google"></i>  Google</div>
-                    <div className="fb"><i className="fab fa-facebook"></i>  Facebook</div>
+                    <div className="go"><span><i className="fab fa-google"></i>  Google</span></div>
+                    <div className="fb"><span><i className="fab fa-facebook"></i>  Facebook</span></div>
                 </div>
 
             </form>
