@@ -19,33 +19,37 @@ export const Characters = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		
-	let testArray = [context.currentUser.id, fav];
 
-    console.log('char id to add ' + fav)
-    //fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
-        .then(res => {
-            if (!res.ok) throw Error(res.statusText);
-            return res.json();
-        })
-        .then(response => {
-           // console.log('Success:', response.results)
-let newArray=[...response.results];
-console.log('Success:', newArray)
-let newArray2=[];
-newArray.map((elm)=>{
-let each_elm={}
-each_elm.name=elm.name;
-each_elm.id=elm.id;
-each_elm.image= elm.thumbnail.path+elm.thumbnail.extension;
+	
+
+			fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
+			.then(res => {
+				if (!res.ok) throw Error(res.statusText);
+				return res.json();
+			})
+			.then(response => {
+				console.log('Our test starts here, lets see :');
+			
+				let newArray = [...response.data.results];
+			
+				let newArray2 = [];
+				newArray.map((elm) => {
+					let each_elm = {}
+					each_elm.name = elm.name;
+					each_elm.id = elm.id;
+					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
+					console.log(each_elm.image)
+					each_elm.comics = elm.comics.available;
+					each_elm.description = elm.description.slice(0, 20) + '...'
+					each_elm.series = elm.series.available;
+
+					newArray2.push(each_elm);
+				})
+				context.setListC(newArray2);
 
 
-newArray2.push(each_elm);
-})
-
-
-        })
-        .catch(error => console.error(error));
+			})
+			.catch(error => console.error(error));
 
 
 	}, []);
@@ -154,10 +158,10 @@ newArray2.push(each_elm);
 	}
 
 
-	function convertToMd5 () {
-        const hash = md5(inputValue);
-        setMd5Hash(hash);
-    };
+	function convertToMd5() {
+		const hash = md5(inputValue);
+		setMd5Hash(hash);
+	};
 
 	return (
 
@@ -177,7 +181,7 @@ newArray2.push(each_elm);
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
 						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Price: (Low to High)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics</span></li>
 						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Genre</span></li>
 
 					</ul>
@@ -203,14 +207,13 @@ newArray2.push(each_elm);
 
 				{context.listC.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.img} className="card-img-top" alt="..." />
+						<img src={element.image} className="card-img-top" alt="..." />
 
 						<div className="card-body h-50">
 							<h5 className="card-title">{element.name}</h5>
-							<p> Gender : Male <br />
-
-								Hair-Color : Black<br />
-								Eye-Color :Brown</p>
+							<p>Comics :{element.comics} <br />
+								Series: {element.series}		<br />
+								Description : {element.description}</p>
 
 
 							<div className="learn_like">
