@@ -11,18 +11,6 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	return (
 		<div className=" text-light pt-2 px-4 mb-2" style={{ backgroundColor: "black" }}>
 			<div className="row pt-2 " style={{ backgroundColor: "black" }}>
@@ -68,9 +56,10 @@ export const Navbar = () => {
 								<ul>
 									<li><span className="nav_link  nav_test" onClick={() => navigate('')}>News</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/characters')}>Characters</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Movies</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Series</span></li>
+									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Comics</span></li>
+									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Creators</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Events</span></li>
+									<li><span className="nav_link nav_test" onClick={() => navigate('')}>Series</span></li>
 								</ul>
 
 								{/* <a className="nav-link text-secondary " href="#">News</a>
