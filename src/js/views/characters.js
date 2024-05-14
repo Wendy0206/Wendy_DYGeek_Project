@@ -20,8 +20,6 @@ export const Characters = () => {
 
 	useEffect(() => {
 
-	
-
 			fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
