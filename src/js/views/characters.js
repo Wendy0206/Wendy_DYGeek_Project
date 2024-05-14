@@ -1,11 +1,10 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import {useEffect, useContext } from "react";
 
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
-import md5 from "md5";
 
 import image1 from '../../img/captain.jpg';
 import image2 from '../../img/Sentri.jpg';
@@ -195,7 +194,10 @@ export const Characters = () => {
 
 								</div>
 							<div className="learn_like">
-								<Link to={`/demo/${element.name}`} state={element}> <button className="learn_button" >Learn More</button></Link>
+								<Link to={`/demo/${element.name}`} state={element}> 
+								<button className="learn_button" >Learn More</button>
+								</Link>
+
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
 
 							</div>
@@ -205,4 +207,6 @@ export const Characters = () => {
 			</div>
 		</div>
 	);
+
 }
+
