@@ -55,7 +55,7 @@ export const Navbar = () => {
 							<div className="navbar-nav">
 								<ul>
 									<li><span className="nav_link  nav_test" onClick={() => navigate('')}>News</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
+									<li><span className="nav_link nav_test" onClick={() => navigate('/characters')}>Characters</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
 								</ul>
