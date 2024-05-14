@@ -3,6 +3,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/demo.css";
 import { AppContext } from "../layout";
+import { NavigationContext } from "react-router/dist/lib/context";
 
 export const Demo = () => {
 const location =useLocation();
@@ -13,36 +14,63 @@ const [searchVal, setSearchVal]= useState('');
 const [searchRes, setSearchRes]= useState([]);
 
 function search_function(val){
-	setSearchVal(val.target.value);
+	let clear_res=[];
+	setSearchRes(clear_res);
+	let search_val=val.target.value;
 
+	
+if(search_val.length>3){
+	
 	let newArray = [...searchRes];
-let newObj= {name:val.target.value};
-newArray.push(newObj);
-setSearchRes(newArray);
+	let newObj= {name:val.target.value};
+	newArray.push(newObj);
+	
 
-	// fetch('1https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
-	// 		.then(res => {
-	// 			if (!res.ok) throw Error(res.statusText);
-	// 			return res.json();
-	// 		})
-	// 		.then(response => {
+
+	fetch('https://marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com/name?q='+newObj.name,{
+
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
+			'X-RapidAPI-Host': 'marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com'
+		}
+
+	})
+			.then(res => {
+				if (!res.ok) {
+				
+					console.log('Not found check if it was called :');
+					let newArray = [{name:'No matching characters found'}];
+					setSearchRes(newArray);
+					setSearchVal('');
 			
-	// 			let newArray = [...response.data.results];
+				}
+				return res.json();
+				
+			})
+			.then(response => {
 			
-	// 			let newArray2 = [];
-	// 			newArray.map((elm) => {
-	// 				let each_elm = {}
-	// 				each_elm.name = elm.name;
-	// 				each_elm.id = elm.id;
-					
-	// 				newArray2.push(each_elm);
-	// 			})
-	// 			setSearchRes(newArray2);
+				let newArray = [];
+				
+		
+				response.map((elm) => {
+					let each_elm = {}
+					each_elm.name = elm.name;
+					each_elm.id = elm.id;
+					each_elm.description= elm.description;
+				//	each_elm.image=
+				// each_elm.quote= elm.quote[0];	
+					newArray.push(each_elm);
+				})
+				console.log('Do we really get this character or? ');
+				console.log(newArray);
+				setSearchRes(newArray);
 
-	// 		})
-	// 		.catch(error => console.error(error));
+			})
+			.catch(error => console.error(error));
 
-
+		}
+		setSearchVal(val.target.value);
 
 }
 
@@ -57,12 +85,10 @@ setSearchRes(newArray);
 
 				<div class="dropdown">
 				<input className="form-control dropdown-toggle" type="search" value={searchVal}  id="dropdownMenuButton" data-bs-toggle="dropdown"  placeholder="Search your character"  aria-haspopup="true" aria-expanded="false" onChange={(e)=>search_function(e)}/>
-  {/* <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button> */}
+ 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	{searchRes.map((elm)=>
-	<a class="dropdown-item" href="#">{elm.name}</a>
+	{searchRes.map((elm, ind)=>
+	<span  key={ind} class="dropdown-item" >{elm.name}</span>
 	)}
   
     
