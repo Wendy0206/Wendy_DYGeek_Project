@@ -4,7 +4,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 15px;
-  width: 100%;
+  width: 95%;
   gap: 20px;
 
 }
@@ -15,7 +15,8 @@
 }
 
 .catalog_div {
-  width: 90%;
+  width: 95%;
+  min-height: 70vh;
 }
 
 .nothing_div {
@@ -124,7 +125,7 @@ span {
 
 .slideshow3 {
   position: relative;
-  width: 100%;
+  width: 95%;
   height: 800px;
   margin-top: 30px;
   margin-bottom: -400px;

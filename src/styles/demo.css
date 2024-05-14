@@ -3,12 +3,14 @@
     margin-top: 5px;
     margin-bottom: 10px;
     margin-left: 1%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .demo_div{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 95%;
     justify-content: center;
 }
 

@@ -20,28 +20,27 @@ export const Events = () => {
 
 	useEffect(() => {
 
-	
 
-			fetch('https://gateway.marvel.com/v1/public/events?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
+
+		fetch('https://gateway.marvel.com/v1/public/events?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
 				return res.json();
 			})
 			.then(response => {
 				console.log('Our test starts here, lets see :');
-			
+
 				let newArray = [...response.data.results];
-			
+
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
 					each_elm.title = elm.title;
 					each_elm.id = elm.id;
-					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
-					each_elm.description = (elm.description!=null)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'
-					
-					each_elm.start=elm.start;
-					each_elm.type = elm.type;
+					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
+					each_elm.description = (elm.description != null) ? elm.description.slice(0, 50) + '...' : 'Unfortunately there is no description on this one...'
+					each_elm.start = (elm.start == null) ? 'Unknown' : elm.start.slice(0,11);
+
 					newArray2.push(each_elm);
 				})
 				console.log('Our events test starts here, check this :');
@@ -54,6 +53,33 @@ export const Events = () => {
 
 
 	}, []);
+
+	const sortTitle = (a, b) => {
+		let nameA = a.title.toUpperCase();
+		let nameB = b.title.toUpperCase();
+		if (nameA < nameB) return -1;
+		if (nameA > nameB) return 1;
+	}
+
+	const sortDate = (a, b) => {
+		let dateA = a.start.toUpperCase();
+		let dateB = b.start.toUpperCase();
+		if (dateA < dateB) return -1;
+		if (dateA > dateB) return 1;
+	  }
+	
+
+	  function filter_listing_function(val) {
+		var test = [...context.listEvents];
+		if (val == 1) {
+			var final = test.toSorted(sortTitle);
+		}
+		else {
+			var final = test.toSorted(sortDate);
+		}
+		context.setListEvents(final);
+
+	}
 
 
 
@@ -71,14 +97,13 @@ export const Events = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{/* <i class="fa-solid fa-sliders fa-2xl"></i> */}
+						{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Genre</span></li>
-
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Title (A-Z)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Release date</span></li>
+					
 					</ul>
 				</div>
 
@@ -87,11 +112,11 @@ export const Events = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img class="img_sl" src={image1} />
-				<img class=" img_sl" src={image2} />
-				<img class=" img_sl" src={image3} />
-				<img class=" img_sl" src={image4} />
-				<img class=" img_sl" src={image5} />
+				<img className="img_sl" src={image1} />
+				<img className=" img_sl" src={image2} />
+				<img className=" img_sl" src={image3} />
+				<img className=" img_sl" src={image4} />
+				<img className=" img_sl" src={image5} />
 
 			</div>
 
@@ -102,13 +127,15 @@ export const Events = () => {
 
 				{context.listEvents.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.image} className="card-img-top" alt="..." />
+						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
-							<h5 className="card-title">{element.title}</h5>
-							<p>Type :{element.type} <br />
-								Start: {element.start}		<br />
-								Description : {element.description}</p>
+							<div className="card_center_div">
+								<h5 className="card-title">{element.title}</h5>
+								<p>
+									Start: {element.start}<br />
+									Description : {element.description}</p>
+							</div>
 							<div className="learn_like">
 								<Link to={`/demo/${element.name}`} state={element}> <button className="learn_button" >Learn More</button></Link>
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

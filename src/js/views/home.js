@@ -30,7 +30,7 @@ export const Home = () => {
 
 		<div className="container catalog_div">
 
-			
+			<h1>There is nothing to show here</h1>
 		
 		</div>
 	);

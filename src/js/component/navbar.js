@@ -60,13 +60,6 @@ export const Navbar = () => {
 									<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
 								</ul>
 
-								{/* <a className="nav-link text-secondary " href="#">News</a>
-								<a className="nav-link text-secondary nav_test" href="#">Characters</a>
-								<a className="nav-link  text-secondary" href="#">Movies</a>
-								<a className="nav-link  text-secondary " href="#">Series</a>
-								<a className="nav-link  text-secondary " href="#">Events</a> */}
-
-
 							</div>
 
 						</div>

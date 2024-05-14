@@ -66,7 +66,7 @@ export const Creators = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{/* <i class="fa-solid fa-sliders fa-2xl"></i> */}
+						{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
@@ -82,11 +82,11 @@ export const Creators = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img class="img_sl" src={image1} />
-				<img class=" img_sl" src={image2} />
-				<img class=" img_sl" src={image3} />
-				<img class=" img_sl" src={image4} />
-				<img class=" img_sl" src={image5} />
+				<img className="img_sl" src={image1} />
+				<img className=" img_sl" src={image2} />
+				<img className=" img_sl" src={image3} />
+				<img className=" img_sl" src={image4} />
+				<img className=" img_sl" src={image5} />
 
 			</div>
 

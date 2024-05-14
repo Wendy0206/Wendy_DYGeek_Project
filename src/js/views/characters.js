@@ -121,44 +121,26 @@ export const Characters = () => {
 		if (nameA > nameB) return 1;
 	}
 
-	const sortGenre = (a, b) => {
-		let genreA = a.genre_needed.toUpperCase();
-		let genreB = b.genre_needed.toUpperCase();
-		if (genreA < genreB) return -1;
-		if (genreA > genreB) return 1;
-	}
 
-	const sortPrice = (a, b) => a.rate - b.rate;
+	const sortComics = (a, b) => a.comics - b.comics;
+	const sortSeries = (a, b) => a.series - b.series;
 
 	function filter_listing_function(val) {
-
+		var test = [...context.listC];
 		if (val == 1) {
-			let test = [...workerListings];
-			let final = test.toSorted(sortName);
-			//setWorkerListings(final);
-
+			var final = test.toSorted(sortName);
 		}
 		else if (val == 2) {
-			let test = [...workerListings];
-			let final = test.toSorted(sortPrice);
-
+			var final = test.toSorted(sortComics);
 		}
-		else if (val == 2) {
-
-			let test = [...workerListings];
-			let final = test.toSorted(sortGenre);
-
-		} else {
-
-		}
-
+		else if (val == 3) {
+			var final = test.toSorted(sortSeries);	
+		} 
+		context.setListC(final);
 	}
 
 
-	function convertToMd5() {
-		const hash = md5(inputValue);
-		setMd5Hash(hash);
-	};
+	
 
 	return (
 
@@ -173,13 +155,13 @@ export const Characters = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{/* <i class="fa-solid fa-sliders fa-2xl"></i> */}
+						{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
 						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Genre</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics (High-Low)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Series (High-Low)</span></li>
 
 					</ul>
 				</div>
@@ -189,11 +171,11 @@ export const Characters = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img class="img_sl" src={image1} />
-				<img class=" img_sl" src={image2} />
-				<img class=" img_sl" src={image3} />
-				<img class=" img_sl" src={image4} />
-				<img class=" img_sl" src={image5} />
+				<img className="img_sl" src={image1} />
+				<img className=" img_sl" src={image2} />
+				<img className=" img_sl" src={image3} />
+				<img className=" img_sl" src={image4} />
+				<img className=" img_sl" src={image5} />
 
 			</div>
 

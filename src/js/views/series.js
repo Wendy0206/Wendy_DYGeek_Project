@@ -20,9 +20,6 @@ export const Series = () => {
 	const [randomImg, setRandomImg]= useState([]);
 
 	useEffect(() => {
-
-	
-
 			fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
@@ -41,7 +38,7 @@ export const Series = () => {
 					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
 					each_elm.description = (elm.description!=null)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'		
 					each_elm.start=elm.startYear;
-					each_elm.type = elm.type;
+					each_elm.type = (elm.type)? 'Unknown' : elm.type;
 					newArray2.push(each_elm);
 				})
 				
@@ -49,21 +46,52 @@ export const Series = () => {
 
 				context.setListSeries(newArray2);
 				
-				
-				
 				let random_img=newArray2.filter((elm)=>elm.image.indexOf('_not_')==-1).map(({image})=>({image}));
 				console.log('Our random image test starts here, check this :');
-				
                 setRandomImg(random_img);
 				console.log(randomImg);
 				
-                  
-
 			})
 			.catch(error => console.error(error));
-
-
 	}, []);
+
+
+
+	const sortTitle = (a, b) => {
+		let nameA = a.title.toUpperCase();
+		let nameB = b.title.toUpperCase();
+		if (nameA < nameB) return -1;
+		if (nameA > nameB) return 1;
+	}
+
+
+	
+	const sortType = (a, b) => {
+		let nameA = a.type.toUpperCase();
+		let nameB = b.type.toUpperCase();
+		if (nameA < nameB) return -1;
+		if (nameA > nameB) return 1;
+	}
+
+
+	const sortDate = (a, b) =>  a.start - b.start;
+		
+
+	  function filter_listing_function(val) {
+		var test = [...context.listSeries];
+		if (val == 1) {	
+			var final = test.toSorted(sortTitle);
+		}
+		else if (val == 2) {
+		 var final = test.toSorted(sortDate);
+		}
+		else{
+			var final = test.toSorted(sortType);
+		}
+	
+		context.setListSeries(final);
+	}
+
 
 
 
@@ -81,13 +109,13 @@ export const Series = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{/* <i class="fa-solid fa-sliders fa-2xl"></i> */}
+					
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics</span></li>
-						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Genre</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Title (A-Z)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Release Date</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Type</span></li>
 
 					</ul>
 				</div>
@@ -97,17 +125,17 @@ export const Series = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img class="img_sl" src={image1} />
-				<img class=" img_sl" src={image2} />
-				<img class=" img_sl" src={image3} />
-				<img class=" img_sl" src={image4} />
-				<img class=" img_sl" src={image4} />
+				<img className="img_sl" src={image1} />
+				<img className=" img_sl" src={image2} />
+				<img className=" img_sl" src={image3} />
+				<img className=" img_sl" src={image4} />
+				<img className=" img_sl" src={image4} />
 
-				{/* <img class="img_sl" src={random_img[0]} />
-				<img class=" img_sl" src={random_img[1]} />
-				<img class=" img_sl" src={random_img[2]} />
-				<img class=" img_sl" src={random_img[3]} />
-				<img class=" img_sl" src={random_img[4]} /> */}
+				{/* <img className="img_sl" src={random_img[0]} />
+				<img className=" img_sl" src={random_img[1]} />
+				<img className=" img_sl" src={random_img[2]} />
+				<img className=" img_sl" src={random_img[3]} />
+				<img className=" img_sl" src={random_img[4]} /> */}
 
 			</div>
 
@@ -118,13 +146,15 @@ export const Series = () => {
 
 				{context.listSeries.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.image} className="card-img-top" alt="..." />
+						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
+						<div className="card_center_div">
 							<h5 className="card-title">{element.title}</h5>
 							<p>Type : {element.type} <br />
-								Star : {element.start}		<br />
+								Start : {element.start}	<br />
 								Description : {element.description}</p>
+								</div>
 							<div className="learn_like">
 								<Link to={`/demo/${element.title}`} state={element}> <button className="learn_button" >Learn More</button></Link>
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
