@@ -13,58 +13,43 @@ import image3 from '../../img/Doom.jpg';
 import image4 from '../../img/Soldier.jpg';
 import image5 from '../../img/Doctor_Strange.jpeg';
 
-export const Series = () => {
+export const Creators = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-	const [randomImg, setRandomImg]= useState([]);
 
 	useEffect(() => {
 
 	
 
-			fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
+			fetch('https://gateway.marvel.com/v1/public/creators?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
 				return res.json();
 			})
 			.then(response => {
-				console.log('Our test starts here, lets see :');
 			
 				let newArray = [...response.data.results];
 			
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
-					each_elm.title = elm.title;
+					each_elm.name = elm.name
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
-					each_elm.description = (elm.description!=null)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'		
-					each_elm.start=elm.startYear;
-					each_elm.type = elm.type;
+					each_elm.comics = elm.comics.available;
+					each_elm.description = (elm.description.length>5)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'
+					each_elm.series = elm.series.available;
+
 					newArray2.push(each_elm);
 				})
-				
-				// var random_img_clone=[random_img[0].image,random_img[1].image,random_img[2].image,random_img[3].image,random_img[4].image];
-
-				context.setListSeries(newArray2);
-				
-				
-				
-				let random_img=newArray2.filter((elm)=>elm.image.indexOf('_not_')==-1).map(({image})=>({image}));
-				console.log('Our random image test starts here, check this :');
-				
-                setRandomImg(random_img);
-				console.log(randomImg);
-				
-                  
+				context.setListC(newArray2);
 
 			})
 			.catch(error => console.error(error));
 
 
 	}, []);
-
 
 
 
@@ -101,13 +86,7 @@ export const Series = () => {
 				<img class=" img_sl" src={image2} />
 				<img class=" img_sl" src={image3} />
 				<img class=" img_sl" src={image4} />
-				<img class=" img_sl" src={image4} />
-
-				{/* <img class="img_sl" src={random_img[0]} />
-				<img class=" img_sl" src={random_img[1]} />
-				<img class=" img_sl" src={random_img[2]} />
-				<img class=" img_sl" src={random_img[3]} />
-				<img class=" img_sl" src={random_img[4]} /> */}
+				<img class=" img_sl" src={image5} />
 
 			</div>
 
@@ -116,17 +95,20 @@ export const Series = () => {
 
 
 
-				{context.listSeries.map((element, index) =>
-					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.image} className="card-img-top" alt="..." />
+				{context.listC.map((element, index) =>
+					<div key={index} className="card" style={{ width: "15rem", height:"" }}>
+						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
-							<h5 className="card-title">{element.title}</h5>
-							<p>Type : {element.type} <br />
-								Star : {element.start}		<br />
+							<div className="card_center_div">
+							<h5 className="card-title">{element.name}</h5>
+							<p>Comics :{element.comics} <br />
+								Series: {element.series}		<br />
 								Description : {element.description}</p>
+
+								</div>
 							<div className="learn_like">
-								<Link to={`/demo/${element.title}`} state={element}> <button className="learn_button" >Learn More</button></Link>
+								<Link to={`/demo/${element.name}`} state={element}> <button className="learn_button" >Learn More</button></Link>
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
 
 							</div>

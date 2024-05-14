@@ -7,11 +7,11 @@ import { AppContext } from "../layout";
 
 import md5 from "md5";
 
-import image1 from '../../img/kaisen.webp';
-import image2 from '../../img/aot.jpg';
-import image3 from '../../img/yagami.jpg';
-import image4 from '../../img/rengoku.jpg';
-import image5 from '../../img/aot.jpg';
+import image1 from '../../img/captain.jpg';
+import image2 from '../../img/Sentri.jpg';
+import image3 from '../../img/Doom.jpg';
+import image4 from '../../img/Soldier.jpg';
+import image5 from '../../img/Doctor_Strange.jpeg';
 
 export const Characters = () => {
 
@@ -28,7 +28,6 @@ export const Characters = () => {
 				return res.json();
 			})
 			.then(response => {
-				console.log('Our test starts here, lets see :');
 			
 				let newArray = [...response.data.results];
 			
@@ -38,15 +37,13 @@ export const Characters = () => {
 					each_elm.name = elm.name;
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
-					console.log(each_elm.image)
 					each_elm.comics = elm.comics.available;
-					each_elm.description = elm.description.slice(0,40) + '...'
+					each_elm.description = (elm.description.length>5)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'
 					each_elm.series = elm.series.available;
 
 					newArray2.push(each_elm);
 				})
 				context.setListC(newArray2);
-
 
 			})
 			.catch(error => console.error(error));
@@ -206,16 +203,17 @@ export const Characters = () => {
 
 
 				{context.listC.map((element, index) =>
-					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.image} className="card-img-top" alt="..." />
+					<div key={index} className="card" style={{ width: "15rem", height:"" }}>
+						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
+							<div className="card_center_div">
 							<h5 className="card-title">{element.name}</h5>
 							<p>Comics :{element.comics} <br />
 								Series: {element.series}		<br />
 								Description : {element.description}</p>
 
-
+								</div>
 							<div className="learn_like">
 								<Link to={`/demo/${element.name}`} state={element}> <button className="learn_button" >Learn More</button></Link>
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

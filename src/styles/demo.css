@@ -1,13 +1,22 @@
 .back_home{
     position: relative;
-    margin-left:-380px;
-    margin-top: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 1%;
 }
 
 .demo_div{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     justify-content: center;
-    margin: auto;
+}
+
+.card_demo{
+    margin:auto;
+   
+}
+
+.img_demo{
+    height: 45rem;
 }

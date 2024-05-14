@@ -1,34 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-
-
-
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-
 import "../../styles/demo.css";
-
 
 
 export const Demo = () => {
 const location =useLocation();
 const data = location.state;
-
-
-
-
+const navigate = useNavigate();
 
 
 
 	return (
 		<div className="demo_div ">
 			<div className="back_home">
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+				<button className="back_button" onClick={()=>navigate('/')}>Back home</button>
 			</div>
-				<div className="card" style={{width: "50rem"}}>
-			<img src={data.img} className="card-img-top" alt="..."/>
+
+			<div className=""></div>
+				<div className="card h-25 card_demo" style={{width: "50%"}}>
+			<img src={data.image} className="card-img-top img_demo" alt="..."/>
 			<div className="card-body">
 			  <h5 className="card-title">{data.name}</h5>
 			  <p> Gender : Male<br/>

@@ -13,6 +13,7 @@ import { Footer } from "./component/footer";
 import { Login } from "./views/login";
 import { Characters } from "./views/characters";
 import { Series } from "./views/series";
+import { Events } from "./views/events";
 
 
 export const AppContext = createContext();
@@ -24,8 +25,8 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 	const [listC, setListC] = useState([]);
 	const [listCreators, setListCreators] = useState([]);
+	const [listSeries, setListSeries] = useState([]);
 	const [listEvents, setListEvents] = useState([]);
-	const [listComics, setListComics] = useState([]);
 	const [favList, setFavList] = useState([]);
 	const [currentUser, setCurrentUser] = useState( {id:null, user: "  Log in"});
 
@@ -35,6 +36,12 @@ const Layout = () => {
 			<AppContext.Provider value={{
 				listC,
 				setListC,
+				listEvents,
+				setListEvents,
+				listCreators,
+				setListCreators,
+				listSeries,
+				setListSeries,
 				favList,
 				setFavList,
 				currentUser,
@@ -48,6 +55,7 @@ const Layout = () => {
 					<Route path="/characters" element={<Characters/>} />
 					<Route path="/login" element={<Login/>} />
 					<Route path="/series" element={<Series/>} />
+					<Route path="/events" element={<Events/>} />
 						<Route path="/demo/:ind" element={<Demo />} />
 						<Route path="/single" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
