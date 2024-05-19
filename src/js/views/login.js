@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { auth, googleProvider } from '../../config/firebase';
-import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
@@ -26,14 +26,28 @@ if(userN.includes('@') && userP.length>7)
         }catch(error){
             console.log(error);
         }
-      
-
     }   
     else{
         console.log('Please a valid email or password');
     }  
 
     }
+
+    const loginWithEmailAndPassword = async () => {
+        if(userN.includes('@') && userP.length>7)
+            {
+                try{
+                    await signInWithEmailAndPassword(auth, userN, userP);
+                 
+                }catch(error){
+                    console.log(error);
+                }
+            }   
+            else{
+                console.log('Please a valid email or password');
+            }  
+        
+            }
 
 
     const pop_up_sign_in = async () => {
