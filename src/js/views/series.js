@@ -18,6 +18,7 @@ export const Series = () => {
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
 	const [randomImg, setRandomImg]= useState([]);
+	const [	listSeries,	setListSeries]= useState([]);
 
 	useEffect(() => {
 			fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
@@ -26,7 +27,7 @@ export const Series = () => {
 				return res.json();
 			})
 			.then(response => {
-				console.log('Our test starts here, lets see :');
+			
 			
 				let newArray = [...response.data.results];
 			
@@ -44,12 +45,12 @@ export const Series = () => {
 				
 				// var random_img_clone=[random_img[0].image,random_img[1].image,random_img[2].image,random_img[3].image,random_img[4].image];
 
-				context.setListSeries(newArray2);
+				setListSeries(newArray2);
 				
 				let random_img=newArray2.filter((elm)=>elm.image.indexOf('_not_')==-1).map(({image})=>({image}));
-				console.log('Our random image test starts here, check this :');
+			
                 setRandomImg(random_img);
-				console.log(randomImg);
+		
 				
 			})
 			.catch(error => console.error(error));
@@ -78,7 +79,7 @@ export const Series = () => {
 		
 
 	  function filter_listing_function(val) {
-		var test = [...context.listSeries];
+		var test = [...listSeries];
 		if (val == 1) {	
 			var final = test.toSorted(sortTitle);
 		}
@@ -89,7 +90,7 @@ export const Series = () => {
 			var final = test.toSorted(sortType);
 		}
 	
-		context.setListSeries(final);
+		setListSeries(final);
 	}
 
 
@@ -144,7 +145,7 @@ export const Series = () => {
 
 
 
-				{context.listSeries.map((element, index) =>
+				{listSeries.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
 						<img src={element.image} className="card-img-top card_img" alt="..." />
 

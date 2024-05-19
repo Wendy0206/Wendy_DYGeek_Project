@@ -18,11 +18,6 @@ const navigate = useNavigate();
 		<div className="demo_div ">
 			<div className="back_home">
 				<button className="back_button" onClick={()=>navigate('/')}>Back home</button>
-
-
-
-
-
 			</div>
 
 			<div className=""></div>
@@ -32,7 +27,6 @@ const navigate = useNavigate();
 			  <h5 className="card-title">{data.name}</h5>
 			  <p> Gender : Male<br/>
 			 
-			 Hair-Color : Black<br/>
 			 Eye-Color :Brown</p>
 		<div className="learn_like">
 		<Link to="/">

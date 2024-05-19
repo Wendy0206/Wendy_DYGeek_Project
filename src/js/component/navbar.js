@@ -19,7 +19,7 @@ export const Navbar = () => {
 		setSearchRes(clear_res);
 		let search_val=val.target.value;
 		
-	if(search_val.length>3){
+	if(search_val.length>2){
 		
 		let newArray = [...searchRes];
 		let newObj= {name:val.target.value};
@@ -39,7 +39,7 @@ export const Navbar = () => {
 				.then(res => {
 					if (!res.ok) {
 					
-						console.log('Not found check if it was called :');
+				
 						let newArray = [{name:'No matching characters found'}];
 						setSearchRes(newArray);
 						setSearchVal('');
@@ -62,7 +62,7 @@ export const Navbar = () => {
 					// each_elm.quote= elm.quote[0];	
 						newArray.push(each_elm);
 					})
-					console.log('Do we really get this character or? ');
+			
 					console.log(newArray);
 					setSearchRes(newArray);
 	
@@ -97,12 +97,14 @@ export const Navbar = () => {
 				<div className="col-2">
 
 					{/* <input className="form-control mr-m-6 w-100" type="search" placeholder="Search" aria-label="Search" /> */}
-					<div class="dropdown">
+					<div className="dropdown">
 				<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown"  placeholder="Search your character"  aria-haspopup="true" aria-expanded="false" onChange={(e)=>search_function(e)}/>
  
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div className={(searchVal.length>2)? "dropdown-menu" :" dp_done"}  aria-labelledby="dropdownMenuButton" style={{backgroundColor:"black"}}>
 	{searchRes.map((elm, ind)=>
-	<span  key={ind} class="dropdown-item" onClick={()=>lookup_character()} >{elm.name}</span>
+	<span  key={ind} className="dropdown-item dp_none"  onClick={()=>lookup_character()} >{elm.name}</span>
+	// className={(searchRes.length>3)? "dropdown-item" : ""}
+
 	)}
   
     

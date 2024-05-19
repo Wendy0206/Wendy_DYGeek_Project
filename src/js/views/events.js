@@ -17,6 +17,7 @@ export const Events = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
+	const [	listEvents, setListEvents]= useState([]);
 
 	useEffect(() => {
 
@@ -28,7 +29,7 @@ export const Events = () => {
 				return res.json();
 			})
 			.then(response => {
-				console.log('Our test starts here, lets see :');
+		
 
 				let newArray = [...response.data.results];
 
@@ -43,9 +44,9 @@ export const Events = () => {
 
 					newArray2.push(each_elm);
 				})
-				console.log('Our events test starts here, check this :');
-				console.log(newArray2);
-				context.setListEvents(newArray2);
+		
+		
+				setListEvents(newArray2);
 
 
 			})
@@ -70,14 +71,14 @@ export const Events = () => {
 	
 
 	  function filter_listing_function(val) {
-		var test = [...context.listEvents];
+		var test = [...listEvents];
 		if (val == 1) {
 			var final = test.toSorted(sortTitle);
 		}
 		else {
 			var final = test.toSorted(sortDate);
 		}
-		context.setListEvents(final);
+		setListEvents(final);
 
 	}
 
@@ -125,7 +126,7 @@ export const Events = () => {
 
 
 
-				{context.listEvents.map((element, index) =>
+				{listEvents.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
 						<img src={element.image} className="card-img-top card_img" alt="..." />
 

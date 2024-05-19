@@ -1,5 +1,5 @@
 import React from "react";
-import {useEffect, useContext } from "react";
+import {useEffect,useState, useContext } from "react";
 
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,7 +16,7 @@ export const Characters = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-
+const [listC, setListC]=useState([]);
 	useEffect(() => {
 
 			fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
@@ -40,7 +40,7 @@ export const Characters = () => {
 
 					newArray2.push(each_elm);
 				})
-				context.setListC(newArray2);
+				setListC(newArray2);
 
 			})
 			.catch(error => console.error(error));
@@ -57,15 +57,15 @@ export const Characters = () => {
 		if (!newArray2) {
 			let newArray = [...context.favList];
 
-			newArray.push(context.listC[pos]);
+			newArray.push(listC[pos]);
 			context.setFavList(newArray);
-			fetch_add_fav(context.listC[pos].id);
+			fetch_add_fav(listC[pos].id);
 
 		}
 		else {
 
 			let newArray = context.favList.filter((element, index) => element != elm);
-			fetch_remove_fav(context.listC[pos].id)
+			fetch_remove_fav(listC[pos].id)
 			context.setFavList(newArray);
 
 		}
@@ -123,7 +123,7 @@ export const Characters = () => {
 	const sortSeries = (a, b) => a.series - b.series;
 
 	function filter_listing_function(val) {
-		var test = [...context.listC];
+		var test = [...listC];
 		if (val == 1) {
 			var final = test.toSorted(sortName);
 		}
@@ -133,7 +133,7 @@ export const Characters = () => {
 		else if (val == 3) {
 			var final = test.toSorted(sortSeries);	
 		} 
-		context.setListC(final);
+		setListC(final);
 	}
 
 
@@ -181,7 +181,7 @@ export const Characters = () => {
 
 
 
-				{context.listC.map((element, index) =>
+				{listC.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem", height:"" }}>
 						<img src={element.image} className="card-img-top card_img" alt="..." />
 

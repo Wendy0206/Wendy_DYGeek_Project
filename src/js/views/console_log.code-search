@@ -1,0 +1,88 @@
+# Query: console.log
+# ContextLines: 1
+
+22 results - 7 files
+
+src/app.ts:
+  1  
+  2: 
+  3  
+
+src/js/component/navbar.js:
+  41  					
+  42: 						
+  43  						let newArray = [{name:'No matching characters found'}];
+
+  64  					})
+  65: 				
+  67  					setSearchRes(newArray);
+
+src/js/views/characters.js:
+   76  
+   77: 		console.log('char id to add ' + fav)
+   78  		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/' + context.currentUser.id + '/favorite/' + fav + '/t', {
+
+   88  			})
+   89: 			.then(response => console.log('Success:', response))
+   90  			.catch(error => console.error(error));
+
+  107  			})
+  108: 			.then(response => console.log('Success:', response))
+  109  			.catch(error => console.error(error));
+
+src/js/views/events.js:
+  31  			.then(response => {
+  32: 			
+  33  
+
+  46  				})
+  47: 			
+  48: 				console.log(newArray2);
+  49  				setListEvents(newArray2);
+
+src/js/views/login.js:
+   17  
+   18:     console.log(auth?.currentUser?.email)
+   19  
+
+   24              await createUserWithEmailAndPassword(auth, userN, userP);
+   25:           
+   26          }catch(error){
+   27:             console.log(error);
+   28          }
+
+   32      else{
+   33:         console.log('Please a valid email or password');
+   34      }  
+
+   83              if (userN.length > 5 && userP.length > 5) {
+   84:                 console.log(auth.currentUser.email)
+   85                  let test = [userN, userP];
+
+  144                  })
+  145:                 .then(response => console.log('Success:', response))
+  146                  .catch(error => console.error(error));
+
+src/js/views/series.js:
+  29  			.then(response => {
+  30: 			
+  31  			
+
+  50  				let random_img=newArray2.filter((elm)=>elm.image.indexOf('_not_')==-1).map(({image})=>({image}));
+  51: 				console.log('Our random image test starts here, check this :');
+  52                  setRandomImg(random_img);
+  53: 				console.log(randomImg);
+  54  				
+
+src/js/views/single.js:
+  27  				test.forEach((elm,id) => {
+  28: 					console.log(test)
+  29  					let test2 = context.listC.filter((el,id) => el.id == elm.people_id);
+
+  38  
+  39: 			.catch(error => console.log(error));
+  40  
+
+  66  			})
+  67: 			.then(response => console.log('Success:', response))
+  68  			.catch(error => console.error(error));

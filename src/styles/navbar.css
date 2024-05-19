@@ -7,7 +7,9 @@
   height: 50px;
   margin-top: 10px;
 }
-
+.dp_none{
+display: none;
+}
 
 .star_img {
   width: 80%;

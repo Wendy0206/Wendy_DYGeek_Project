@@ -23,10 +23,7 @@ const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
-	const [listC, setListC] = useState([]);
-	const [listCreators, setListCreators] = useState([]);
-	const [listSeries, setListSeries] = useState([]);
-	const [listEvents, setListEvents] = useState([]);
+	
 	const [favList, setFavList] = useState([]);
 	const [currentUser, setCurrentUser] = useState( {id:null, user: "  Log in"});
 
@@ -34,14 +31,6 @@ const Layout = () => {
 	return (
 		<div>
 			<AppContext.Provider value={{
-				listC,
-				setListC,
-				listEvents,
-				setListEvents,
-				listCreators,
-				setListCreators,
-				listSeries,
-				setListSeries,
 				favList,
 				setFavList,
 				currentUser,
