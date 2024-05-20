@@ -94,7 +94,7 @@ return (
             <label htmlFor="username" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }}>{userLabel[0]}</label>
             <input type="" placeholder="username" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }} value={userU} id="username" onChange={(e) => setUserU(e.target.value)} />
 
-            <label htmlFor="email">{userLabel[1]}</label>
+                <label htmlFor="email">{userLabel[1]}</label>
             <input className="input_email" type="text" placeholder="Email or Phone" value={userN} id="email" onChange={(e) => setUserN(e.target.value)} />
             <div class="invalid-feedback">
                 Please choose a valid email
