@@ -1,7 +1,11 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import imglink from "../../img/GeekZ.png";
+
+import { auth, googleProvider } from '../../config/firebase';
+import {  signOut } from "firebase/auth";
+
 
 import "../../styles/navbar.css";
 import { AppContext } from "../layout";
@@ -11,6 +15,28 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 	const [searchVal, setSearchVal] = useState('');
 	const [searchRes, setSearchRes] = useState([]);
+
+
+
+	const sign_out = async () => {
+		try {
+			await signOut(auth);
+	
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	
+
+
+
+
+
+
+
+
+
+
 
 	function search_function(val) {
 		let clear_res = [];
@@ -69,9 +95,7 @@ export const Navbar = () => {
 
 	}
 
-	function lookup_character() {
-
-	}
+	
 
 	return (
 		<div className=" text-light pt-2 px-4 mb-2" style={{ backgroundColor: "black" }}>

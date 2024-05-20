@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
@@ -18,19 +18,12 @@ export const Home = () => {
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		
-
-
-	}, []);
-
-
 
 	return (
 
 		<div className="container catalog_div">
 
-			<h1>There is nothing to show here</h1>
+			<h1 className="nothing_to_show">There is nothing to show here</h1>
 		
 		</div>
 	);

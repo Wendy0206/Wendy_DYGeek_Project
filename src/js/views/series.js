@@ -17,41 +17,41 @@ export const Series = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-	const [randomImg, setRandomImg]= useState([]);
-	const [	listSeries,	setListSeries]= useState([]);
+	const [randomImg, setRandomImg] = useState([]);
+	const [listSeries, setListSeries] = useState([]);
 
 	useEffect(() => {
-			fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
+		fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
 				return res.json();
 			})
 			.then(response => {
-			
-			
+
+
 				let newArray = [...response.data.results];
-			
+
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
 					each_elm.title = elm.title;
 					each_elm.id = elm.id;
-					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
-					each_elm.description = (elm.description!=null)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'		
-					each_elm.start=elm.startYear;
-					each_elm.type = (elm.type)? 'Unknown' : elm.type;
+					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
+					each_elm.description = (elm.description != null) ? elm.description.slice(0, 40) + '...' : 'Unfortunately there is no description here...'
+					each_elm.start = elm.startYear;
+					each_elm.type = (elm.type) ? 'Unknown' : elm.type;
 					newArray2.push(each_elm);
 				})
-				
+
 				// var random_img_clone=[random_img[0].image,random_img[1].image,random_img[2].image,random_img[3].image,random_img[4].image];
 
 				setListSeries(newArray2);
-				
-				let random_img=newArray2.filter((elm)=>elm.image.indexOf('_not_')==-1).map(({image})=>({image}));
-			
-                setRandomImg(random_img);
-		
-				
+
+				let random_img = newArray2.filter((elm) => elm.image.indexOf('_not_') == -1).map(({ image }) => ({ image }));
+
+				setRandomImg(random_img);
+
+
 			})
 			.catch(error => console.error(error));
 	}, []);
@@ -66,7 +66,7 @@ export const Series = () => {
 	}
 
 
-	
+
 	const sortType = (a, b) => {
 		let nameA = a.type.toUpperCase();
 		let nameB = b.type.toUpperCase();
@@ -75,21 +75,21 @@ export const Series = () => {
 	}
 
 
-	const sortDate = (a, b) =>  a.start - b.start;
-		
+	const sortDate = (a, b) => a.start - b.start;
 
-	  function filter_listing_function(val) {
+
+	function filter_listing_function(val) {
 		var test = [...listSeries];
-		if (val == 1) {	
+		if (val == 1) {
 			var final = test.toSorted(sortTitle);
 		}
 		else if (val == 2) {
-		 var final = test.toSorted(sortDate);
+			var final = test.toSorted(sortDate);
 		}
-		else{
+		else {
 			var final = test.toSorted(sortType);
 		}
-	
+
 		setListSeries(final);
 	}
 
@@ -110,7 +110,7 @@ export const Series = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-					
+
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
@@ -140,7 +140,7 @@ export const Series = () => {
 
 			</div>
 
-
+		
 			<div className="list_div">
 
 
@@ -150,12 +150,12 @@ export const Series = () => {
 						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
-						<div className="card_center_div">
-							<h5 className="card-title">{element.title}</h5>
-							<p>Type : {element.type} <br />
-								Start : {element.start}	<br />
-								Description : {element.description}</p>
-								</div>
+							<div className="card_center_div">
+								<h5 className="card-title">{element.title}</h5>
+								<p>Type : {element.type} <br />
+									Start : {element.start}	<br />
+									Description : {element.description}</p>
+							</div>
 							<div className="learn_like">
 								<Link to={`/demo/${element.title}`} state={element}> <button className="learn_button" >Learn More</button></Link>
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

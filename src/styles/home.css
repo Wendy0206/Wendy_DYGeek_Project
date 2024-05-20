@@ -1,3 +1,8 @@
+.nothing_to_show {
+  align-items: center;
+  margin: auto;
+}
+
 
 .list_div {
   display: inline-flex;
@@ -6,9 +11,7 @@
   margin-top: 15px;
   width: 95%;
   gap: 20px;
-
 }
-
 
 .testred {
   color: red;
@@ -17,6 +20,9 @@
 .catalog_div {
   width: 95%;
   min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .nothing_div {
