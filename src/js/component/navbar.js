@@ -9,76 +9,69 @@ import { AppContext } from "../layout";
 export const Navbar = () => {
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-	const [searchVal, setSearchVal]= useState('');
-	const [searchRes, setSearchRes]= useState([]);
+	const [searchVal, setSearchVal] = useState('');
+	const [searchRes, setSearchRes] = useState([]);
 
-
-
-	function search_function(val){
-		let clear_res=[];
+	function search_function(val) {
+		let clear_res = [];
 		setSearchRes(clear_res);
-		let search_val=val.target.value;
-		
-	if(search_val.length>2){
-		
-		let newArray = [...searchRes];
-		let newObj= {name:val.target.value};
-		newArray.push(newObj);
-		
-	
-	
-		fetch('https://marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com/name?q='+newObj.name,{
-	
-			method: 'GET',
-			headers: {
-				'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
-				'X-RapidAPI-Host': 'marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com'
-			}
-	
-		})
+		let search_val = val.target.value;
+
+		if (search_val.length > 2) {
+
+			let newObj = { name: val.target.value };
+
+
+			fetch('https://marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com/name?q=' + newObj.name, {
+
+				method: 'GET',
+				headers: {
+					'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
+					'X-RapidAPI-Host': 'marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com'
+				}
+
+			})
 				.then(res => {
 					if (!res.ok) {
-					
-				
-						let newArray = [{name:'No matching characters found'}];
+
+
+						let newArray = [{ name: 'No matching characters found' }];
 						setSearchRes(newArray);
 						setSearchVal('');
-				
+
 					}
 					return res.json();
-					
+
 				})
 				.then(response => {
-				
+
 					let newArray = [];
-					
-			
+
+
 					response.map((elm) => {
 						let each_elm = {}
 						each_elm.name = elm.name;
 						each_elm.id = elm.id;
-						each_elm.description= elm.description;
-					//	each_elm.image=
-					// each_elm.quote= elm.quote[0];	
+						each_elm.description = elm.description;
+						//	each_elm.image=
+						// each_elm.quote= elm.quote[0];	
 						newArray.push(each_elm);
 					})
-			
+
 					console.log(newArray);
 					setSearchRes(newArray);
-	
+
 				})
 				.catch(error => console.error(error));
-	
-			}
-			setSearchVal(val.target.value);
-	
+
+		}
+		setSearchVal(val.target.value);
+
 	}
-	
-	function lookup_character(){
-		
+
+	function lookup_character() {
+
 	}
-	
-	
 
 	return (
 		<div className=" text-light pt-2 px-4 mb-2" style={{ backgroundColor: "black" }}>
@@ -98,18 +91,19 @@ export const Navbar = () => {
 
 					{/* <input className="form-control mr-m-6 w-100" type="search" placeholder="Search" aria-label="Search" /> */}
 					<div className="dropdown">
-				<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown"  placeholder="Search your character"  aria-haspopup="true" aria-expanded="false" onChange={(e)=>search_function(e)}/>
- 
-  <div className={(searchVal.length>2)? "dropdown-menu" :" dp_done"}  aria-labelledby="dropdownMenuButton" style={{backgroundColor:"black"}}>
-	{searchRes.map((elm, ind)=>
-	<span  key={ind} className="dropdown-item dp_none"  onClick={()=>lookup_character()} >{elm.name}</span>
-	// className={(searchRes.length>3)? "dropdown-item" : ""}
+						<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" aria-haspopup="true" aria-expanded="false" onChange={(e) => search_function(e)} />
 
-	)}
-  
-    
-  </div>
-</div>
+						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
+							{/* className={(searchVal.length>2)? "dropdown-menu" :" dp_done"} */}
+
+							{searchRes.map((elm, ind) =>
+								<span key={ind} className="dropdown-item text-light" onClick={() => lookup_character()} >{elm.name}</span>
+
+							)}
+
+
+						</div>
+					</div>
 
 
 

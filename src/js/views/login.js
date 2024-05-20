@@ -15,7 +15,8 @@ export const Login = () => {
     const navigate = useNavigate();
     const context = useContext(AppContext);
 
-    console.log(auth?.currentUser?.email)
+    console.log('Test which user is sign in');
+    console.log(auth?.currentUser?.email);
 
     const fetch_newUser = async () => {
 if(userN.includes('@') && userP.length>7)
