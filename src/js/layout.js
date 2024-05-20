@@ -23,9 +23,9 @@ const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
-	
+
 	const [favList, setFavList] = useState([]);
-	const [currentUser, setCurrentUser] = useState( {id:null, user: "  Log in"});
+	const [currentUser, setCurrentUser] = useState({});
 
 
 	return (
@@ -36,22 +36,22 @@ const Layout = () => {
 				currentUser,
 				setCurrentUser
 			}} >
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar/>
-					<Routes>			
-					<Route path="/" element={<Home />}/>
-					<Route path="/characters" element={<Characters/>} />
-					<Route path="/login" element={<Login/>} />
-					<Route path="/series" element={<Series/>} />
-					<Route path="/events" element={<Events/>} />
-						<Route path="/demo/:ind" element={<Demo />} />
-						<Route path="/single" element={<Single />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
-					</Routes>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
+				<BrowserRouter basename={basename}>
+					<ScrollToTop>
+						<Navbar />
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/characters" element={<Characters />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/series" element={<Series />} />
+							<Route path="/events" element={<Events />} />
+							<Route path="/demo/:ind" element={<Demo />} />
+							<Route path="/single" element={<Single />} />
+							<Route path="*" element={<h1>Not found!</h1>} />
+						</Routes>
+						<Footer />
+					</ScrollToTop>
+				</BrowserRouter>
 			</AppContext.Provider>
 		</div>
 	);
