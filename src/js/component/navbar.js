@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import imglink from "../../img/GeekZ.png";
 
 import { auth, googleProvider } from '../../config/firebase';
-import {  signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 
 import "../../styles/navbar.css";
@@ -16,25 +16,30 @@ export const Navbar = () => {
 	const [searchVal, setSearchVal] = useState('');
 	const [searchRes, setSearchRes] = useState([]);
 
+	function login_logout() {
+
+		if (context.currentUser.username == ' Login') {
+			navigate('/login');
+		}
+		else {
+			sign_out();
+
+
+		}
+	}
 
 
 	const sign_out = async () => {
 		try {
 			await signOut(auth);
-	
+			let userObj = { id: null, username: ' Login' };
+			context.setCurrentUser(userObj);
+			navigate('/login');
+
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	
-
-
-
-
-
-
-
-
 
 
 
@@ -95,8 +100,6 @@ export const Navbar = () => {
 
 	}
 
-	
-
 	return (
 		<div className=" text-light pt-2 px-4 mb-2" style={{ backgroundColor: "black" }}>
 			<div className="row pt-2 " style={{ backgroundColor: "black" }}>
@@ -133,8 +136,8 @@ export const Navbar = () => {
 
 				</div>
 				<div className="col-1 mt-3 ml3" id="log_div" >
-					<button className="btn btn-outline-light " type="submit" onClick={() => navigate('/login')}>
-						<i className="fa-regular fa-user"></i>{context.currentUser.user}</button>
+					<button className="btn btn-outline-light " type="submit" onClick={() => login_logout()}>
+						<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
 				</div>
 
 			</div>

@@ -56,8 +56,8 @@ export const Login = () => {
         try {
             let response = await createUserWithEmailAndPassword(auth, userE, userP);
             create_user_layout();
-            console.log('Lets see what google create account return :');
-            console.log(response);
+            // console.log('Lets see what google create account return :');
+            // console.log(response);
 
         } catch (error) {
             alert(error.message);
@@ -70,7 +70,13 @@ export const Login = () => {
             await signInWithEmailAndPassword(auth, userE, userP);
             console.log('Lets see what google sign in with email returns :');
             console.log(auth.currentUser.getIdToken());
+            var str = auth?.currentUser?.email;
+            let usern = ' ' + str.substring(0, str.indexOf("@"));
 
+            let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
+           
+            context.setCurrentUser(user_cred);
+            navigate('/characters')
         } catch (error) {
             const password = document.querySelector('.input_password');
             password.classList.add('is-invalid');

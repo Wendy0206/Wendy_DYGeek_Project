@@ -1,4 +1,4 @@
-.back_home{
+.back_home {
     position: relative;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -7,18 +7,19 @@
     justify-content: space-between;
 }
 
-.demo_div{
+.demo_div {
     display: flex;
     flex-direction: column;
     width: 95%;
     justify-content: center;
+    min-height: 75vh;
 }
 
-.card_demo{
-    margin:auto;
-   
+.card_demo {
+    margin: auto;
+
 }
 
-.img_demo{
+.img_demo {
     height: 45rem;
 }
