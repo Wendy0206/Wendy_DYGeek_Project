@@ -9,13 +9,13 @@ import { AppContext } from "../layout";
 export const Login = () => {
     const [userLabel, setUserLabel] = useState(['Username', 'Email', 'Password', 'Log in', "Don't have an account? click here"]);
     const [userE, setUserE] = useState('')
-    const [userU, setUserU] = useState('');
+    const [userCP, setUserCP] = useState('');
     const [userP, setUserP] = useState('');
     const [warningP, setWarningP] = useState('');
 
     const navigate = useNavigate();
     const context = useContext(AppContext);
-
+    const [validationText, setValidationText] = useState(['Password or Email incorrect', '']);
 
 
 
@@ -24,13 +24,13 @@ export const Login = () => {
         if (!userE.includes('@')) {
             const email = document.querySelector('.input_email');
             email.classList.toggle('is-invalid');
-            return;
+            return false;
         }
 
         if (userP.length < 6) {
             const password = document.querySelector('.input_password');
             password.classList.toggle('is-invalid');
-            return;
+            return false;
         }
 
 
@@ -38,10 +38,10 @@ export const Login = () => {
             loginWithEmailAndPassword();
         } else {
 
-            if (userU != userP) {
+            if (userCP != userP) {
                 const password2 = document.querySelector('.input_password2');
                 password2.classList.toggle('is-invalid');
-                return;
+                return false;
             }
             else {
                 create_user();
@@ -57,7 +57,7 @@ export const Login = () => {
             let response = await createUserWithEmailAndPassword(auth, userE, userP);
             create_user_layout();
             // console.log('Lets see what google create account return :');
-            // console.log(response);
+         
 
         } catch (error) {
             alert(error.message);
@@ -68,13 +68,11 @@ export const Login = () => {
 
         try {
             await signInWithEmailAndPassword(auth, userE, userP);
-            console.log('Lets see what google sign in with email returns :');
-            console.log(auth.currentUser.getIdToken());
             var str = auth?.currentUser?.email;
             let usern = ' ' + str.substring(0, str.indexOf("@"));
 
             let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
-           
+
             context.setCurrentUser(user_cred);
             navigate('/characters')
         } catch (error) {
@@ -89,6 +87,11 @@ export const Login = () => {
             await signInWithPopup(auth, googleProvider);
             // context.setCurrentUser(response);
 
+            // var str = auth?.currentUser?.email;
+            // let usern = ' ' + str.substring(0, str.indexOf("@"));
+            // let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
+            // context.setCurrentUser(user_cred);
+
         } catch (error) {
             console.error(error);
         }
@@ -101,7 +104,7 @@ export const Login = () => {
     function create_user_layout() {
         setUserE('');
         setUserP('');
-        setUserU('');
+        setUserCP('');
         const email = document.querySelector('.input_email');
         email.classList.remove('is-invalid');
         const password = document.querySelector('.input_password');
@@ -112,9 +115,13 @@ export const Login = () => {
             let new_label = [' Confirm password', 'Create Email', ' Create Password', 'Create Account', "You have an account? Login"];
             setUserLabel(new_label);
 
+            let valid = ['Password must be at least 8 characters', "Passwords don't match"];
+            setValidationText(valid);
+
         }
         else {
-
+            let valid = ['Password or Email incorrect', ""];
+            setValidationText(valid);
             let new_label = ['Username', 'Email', 'Password', 'Log in', "Don't have an account? click here"];
             setUserLabel(new_label);
         }
@@ -137,13 +144,13 @@ export const Login = () => {
                 <label htmlFor="password">{userLabel[2]}</label>
                 <input className="input_password" type="password" placeholder="Password" value={userP} onChange={(e) => setUserP(e.target.value)} />
                 <div className="invalid-feedback">
-                    Password must be at least 8 characters.
+                    {validationText[0]}
                 </div>
 
                 <label htmlFor="confirmPassword" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }}>{userLabel[0]}</label>
-                <input className="input_password2" type="password" placeholder="Reenter password" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }} value={userU} id="confirmPassword" onChange={(e) => setUserU(e.target.value)} />
+                <input className="input_password2" type="password" placeholder="Reenter password" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }} value={userCP} id="confirmPassword" onChange={(e) => setUserCP(e.target.value)} />
                 <div className="invalid-feedback">
-                    Password don't match.
+                    {validationText[1]}
                 </div>
 
                 <button type="button" className="login_button mb-2" onClick={() => createOrSignIn()}>{userLabel[3]}</button>

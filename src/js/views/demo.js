@@ -21,7 +21,7 @@ export const Demo = () => {
 			const data = await getDocs(moviesCollectionRef);
 			console.log('That is a test to see if we get our collection');
 			const filteredData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-			console.log(filteredData);
+		
 			setMovies(filteredData);
 
 		} catch (error) {

@@ -89,7 +89,7 @@ export const Navbar = () => {
 						newArray.push(each_elm);
 					})
 
-					console.log(newArray);
+				
 					setSearchRes(newArray);
 
 				})
