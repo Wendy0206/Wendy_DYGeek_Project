@@ -4,8 +4,10 @@ import { Context } from "../store/appContext";
 import "../../styles/demo.css";
 import { AppContext } from "../layout";
 import { auth } from '../../config/firebase';
+import { storage } from '../../config/firebase';
 import { db } from "../../config/firebase";
 import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from "firebase/storage"
 
 
 export const Single = () => {
@@ -15,13 +17,14 @@ export const Single = () => {
 	const navigate = useNavigate();
 	const [movies, setMovies] = useState([]);
 	const moviesCollectionRef = collection(db, 'Movies');
+	const [uploadF, setUploadF] = useState(null);
 
 	const getMovies = async () => {
 		try {
 			const data = await getDocs(moviesCollectionRef);
 
 			const filteredData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
+			console.log(filteredData);
 			setMovies(filteredData);
 
 		} catch (error) {
@@ -67,9 +70,24 @@ export const Single = () => {
 	}
 
 	const updatemovie = async () => {
-		const moviedoc = doc(db, "Movies", "EMxolQZPNQsCeD46uyFo");
-		await updateDoc(moviedoc, { Title: 'Harry Potter 2' });
-		getMovies();
+		try {
+			const moviedoc = doc(db, "Movies", "EMxolQZPNQsCeD46uyFo");
+			await updateDoc(moviedoc, { Title: 'Harry Potter 5' });
+			getMovies();
+		} catch (error) {
+			alert(error);
+		}
+	}
+
+	const uploadfile = async () => {
+		if (!uploadF) return;
+		const filesfolderref = ref(storage, `ProjectFiles/${uploadF.name}`);
+		try {
+			await uploadBytes(filesfolderref, uploadF);
+			console.log('It works')
+		} catch (error) {
+			alert(error);
+		}
 
 	}
 
@@ -94,9 +112,10 @@ export const Single = () => {
 			</ul>
 
 
+			<input className="form-control[[" type="file" onChange={(e) => setUploadF(e.target.files[0])} placeholder="Upload your file here" />
+			<button className="btn btn-light" onClick={() => uploadfile()}>Update  movie</button><br />
 
 
-			<button className="btn btn-primary" onClick={() => uploadmovie()}>Register movie</button><br />
 			<button className="btn btn-success" onClick={() => updatemovie()}>Update  movie</button><br />
 			<button className="btn btn-danger" onClick={() => deleteMovie()}>Delete movie</button>
 
