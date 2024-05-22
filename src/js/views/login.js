@@ -11,11 +11,10 @@ export const Login = () => {
     const [userE, setUserE] = useState('')
     const [userCP, setUserCP] = useState('');
     const [userP, setUserP] = useState('');
-    const [warningP, setWarningP] = useState('');
+    const [validationText, setValidationText] = useState(['Password or Email incorrect', '']);
 
     const navigate = useNavigate();
     const context = useContext(AppContext);
-    const [validationText, setValidationText] = useState(['Password or Email incorrect', '']);
 
 
 
@@ -57,7 +56,7 @@ export const Login = () => {
             let response = await createUserWithEmailAndPassword(auth, userE, userP);
             create_user_layout();
             // console.log('Lets see what google create account return :');
-         
+
 
         } catch (error) {
             alert(error.message);
@@ -86,7 +85,6 @@ export const Login = () => {
         try {
             await signInWithPopup(auth, googleProvider);
             // context.setCurrentUser(response);
-
             // var str = auth?.currentUser?.email;
             // let usern = ' ' + str.substring(0, str.indexOf("@"));
             // let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
@@ -96,9 +94,6 @@ export const Login = () => {
             console.error(error);
         }
     }
-
-
-
 
 
     function create_user_layout() {

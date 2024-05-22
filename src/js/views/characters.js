@@ -75,7 +75,7 @@ const [listC, setListC]=useState([]);
 		let testArray = [context.currentUser.id, fav];
 
 		console.log('char id to add ' + fav)
-		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/' + context.currentUser.id + '/favorite/' + fav + '/t', {
+		fetch('', {
 			method: 'POST', // or 'POST'
 			body: JSON.stringify(testArray),
 			headers: {
@@ -94,7 +94,7 @@ const [listC, setListC]=useState([]);
 
 	function fetch_remove_fav(fav) {
 		let testArray = [context.currentUser.id, fav];
-		fetch('https://turbo-rotary-phone-g44w56q9gw943pw7w-3000.app.github.dev/user/' + context.currentUser.id + '/favorite/' + fav + '/h', {
+		fetch('', {
 			method: 'DELETE', // or 'POST'
 			body: JSON.stringify(testArray),
 			headers: {
