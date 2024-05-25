@@ -44,11 +44,16 @@ export const Navbar = () => {
 
 
 	function search_function(val) {
-		let clear_res = [];
-		setSearchRes(clear_res);
+		setSearchVal(val.target.value);
+
 		let search_val = val.target.value;
 
-		if (search_val.length > 2) {
+		if (search_val.length < 2) {
+			let clear_search = [];
+			setSearchRes(clear_search);
+		}
+
+		else {
 
 			let newObj = { name: val.target.value };
 
@@ -68,7 +73,7 @@ export const Navbar = () => {
 
 						let newArray = [{ name: 'No matching characters found' }];
 						setSearchRes(newArray);
-						setSearchVal('');
+
 
 					}
 					return res.json();
@@ -96,7 +101,7 @@ export const Navbar = () => {
 				.catch(error => console.error(error));
 
 		}
-		setSearchVal(val.target.value);
+		// setSearchVal(val.target.value);
 
 	}
 
@@ -159,7 +164,7 @@ export const Navbar = () => {
 						<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 							<div className="navbar-nav">
 								<ul>
-									<li><span className="nav_link  nav_test" onClick={() => navigate('/single')}>News</span></li>
+									<li><span className="nav_link  nav_test" onClick={() => navigate('/home')}>News</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
 									<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>

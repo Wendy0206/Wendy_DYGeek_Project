@@ -6,8 +6,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 
-
-
 export const Events = () => {
 
 	const context = useContext(AppContext);

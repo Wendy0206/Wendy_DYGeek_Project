@@ -5,6 +5,7 @@ import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
+
 export const Series = () => {
 
 	const context = useContext(AppContext);

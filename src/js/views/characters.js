@@ -58,7 +58,6 @@ export const Characters = () => {
 
 
 
-
 	function addFavorite(elm, pos) {
 		let newArray2 = context.favList.find((element) => element == elm);
 
