@@ -37,6 +37,7 @@ export const Single = () => {
 
 	}, []);
 
+	
 	const uploadmovie = async () => {
 
 		try {

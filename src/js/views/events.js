@@ -5,19 +5,15 @@ import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
-import md5 from "md5";
 
-import image1 from '../../img/captain.jpg';
-import image2 from '../../img/Sentri.jpg';
-import image3 from '../../img/Doom.jpg';
-import image4 from '../../img/Soldier.jpg';
-import image5 from '../../img/Doctor_Strange.jpeg';
+
 
 export const Events = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-	const [	listEvents, setListEvents]= useState([]);
+	const [listEvents, setListEvents] = useState([]);
+	const [slideList, setSlideList] = useState([]);
 
 	useEffect(() => {
 
@@ -29,7 +25,7 @@ export const Events = () => {
 				return res.json();
 			})
 			.then(response => {
-		
+
 
 				let newArray = [...response.data.results];
 
@@ -40,14 +36,27 @@ export const Events = () => {
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
 					each_elm.description = (elm.description != null) ? elm.description.slice(0, 50) + '...' : 'Unfortunately there is no description on this one...'
-					each_elm.start = (elm.start == null) ? 'Unknown' : elm.start.slice(0,11);
+					each_elm.start = (elm.start == null) ? 'Unknown' : elm.start.slice(0, 11);
 
 					newArray2.push(each_elm);
 				})
-		
-		
-				setListEvents(newArray2);
 
+
+				setListEvents(newArray2);
+				let random_image = [0];
+				let count = 0;
+				random_image = newArray2
+					.filter((elm) => {
+						if (!(elm.image.includes('image_not_')) && count < 5) {
+							count++;
+							return true;
+						}
+						return false;
+					})
+					.map(elm => elm.image);
+				setSlideList(random_image);
+				console.log('We are testing our random image generator');
+				console.log(slideList);
 
 			})
 			.catch(error => console.error(error));
@@ -67,10 +76,10 @@ export const Events = () => {
 		let dateB = b.start.toUpperCase();
 		if (dateA < dateB) return -1;
 		if (dateA > dateB) return 1;
-	  }
-	
+	}
 
-	  function filter_listing_function(val) {
+
+	function filter_listing_function(val) {
 		var test = [...listEvents];
 		if (val == 1) {
 			var final = test.toSorted(sortTitle);
@@ -104,7 +113,7 @@ export const Events = () => {
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
 						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Title (A-Z)</span></li>
 						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Release date</span></li>
-					
+
 					</ul>
 				</div>
 
@@ -113,11 +122,11 @@ export const Events = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img className="img_sl" src={image1} />
-				<img className=" img_sl" src={image2} />
-				<img className=" img_sl" src={image3} />
-				<img className=" img_sl" src={image4} />
-				<img className=" img_sl" src={image5} />
+				<img className="img_sl" src={slideList[4]} />
+				<img className=" img_sl" src={slideList[3]} />
+				<img className=" img_sl" src={slideList[2]} />
+				<img className=" img_sl" src={slideList[1]} />
+				<img className=" img_sl" src={slideList[0]} />
 
 			</div>
 

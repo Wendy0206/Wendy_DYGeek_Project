@@ -1,46 +1,54 @@
 import React from "react";
-import {useEffect,useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 
-import image1 from '../../img/captain.jpg';
-import image2 from '../../img/Sentri.jpg';
-import image3 from '../../img/Doom.jpg';
-import image4 from '../../img/Soldier.jpg';
-import image5 from '../../img/Doctor_Strange.jpeg';
-
 export const Characters = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-const [listC, setListC]=useState([]);
+	const [listC, setListC] = useState([]);
+	const [slideList, setSlideList] = useState([]);
 	useEffect(() => {
 
-			fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
+		fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
 				return res.json();
 			})
 			.then(response => {
-			
+
 				let newArray = [...response.data.results];
-			
+				var random_image = [];
+
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
 					each_elm.name = elm.name;
 					each_elm.id = elm.id;
-					each_elm.image = elm.thumbnail.path+'.'+ elm.thumbnail.extension;
-					each_elm.comics = elm.comics.available;
-					each_elm.description = (elm.description.length>5)? elm.description.slice(0,40) + '...' : 'Unfortunately there is no description here...'
-					each_elm.series = elm.series.available;
+					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
 
+					each_elm.comics = elm.comics.available;
+					each_elm.description = (elm.description.length > 5) ? elm.description.slice(0, 40) + '...' : 'Unfortunately there is no description here...'
+					each_elm.series = elm.series.available;
 					newArray2.push(each_elm);
 				})
 				setListC(newArray2);
+
+				let count = 0;
+				random_image = newArray2
+					.filter((elm) => {
+						if (!(elm.image.includes('image_not_')) && count < 5) {
+							count++;
+							return true;
+						}
+						return false;
+					})
+					.map(elm => elm.image);
+				setSlideList(random_image);
 
 			})
 			.catch(error => console.error(error));
@@ -131,13 +139,13 @@ const [listC, setListC]=useState([]);
 			var final = test.toSorted(sortComics);
 		}
 		else if (val == 3) {
-			var final = test.toSorted(sortSeries);	
-		} 
+			var final = test.toSorted(sortSeries);
+		}
 		setListC(final);
 	}
 
 
-	
+
 
 	return (
 
@@ -168,11 +176,11 @@ const [listC, setListC]=useState([]);
 			</div>
 
 			<div className="slideshow3">
-				<img className="img_sl" src={image1} />
-				<img className=" img_sl" src={image2} />
-				<img className=" img_sl" src={image3} />
-				<img className=" img_sl" src={image4} />
-				<img className=" img_sl" src={image5} />
+				<img className="img_sl" src={slideList[4]} />
+				<img className=" img_sl" src={slideList[3]} />
+				<img className=" img_sl" src={slideList[2]} />
+				<img className=" img_sl" src={slideList[1]} />
+				<img className=" img_sl" src={slideList[0]} />
 
 			</div>
 
@@ -182,20 +190,20 @@ const [listC, setListC]=useState([]);
 
 
 				{listC.map((element, index) =>
-					<div key={index} className="card" style={{ width: "15rem", height:"" }}>
+					<div key={index} className="card" style={{ width: "15rem", height: "" }}>
 						<img src={element.image} className="card-img-top card_img" alt="..." />
 
 						<div className="card-body h-50">
 							<div className="card_center_div">
-							<h5 className="card-title">{element.name}</h5>
-							<p>Comics :{element.comics} <br />
-								Series: {element.series}		<br />
-								Description : {element.description}</p>
+								<h5 className="card-title">{element.name}</h5>
+								<p>Comics :{element.comics} <br />
+									Series: {element.series}		<br />
+									Description : {element.description}</p>
 
-								</div>
+							</div>
 							<div className="learn_like">
-								<Link to={`/demo/${element.name}`} state={element}> 
-								<button className="learn_button" >Learn More</button>
+								<Link to={`/demo/${element.name}`} state={element}>
+									<button className="learn_button" >Learn More</button>
 								</Link>
 
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

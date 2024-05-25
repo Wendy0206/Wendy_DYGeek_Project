@@ -82,18 +82,21 @@ export const Login = () => {
 
 
     const google_sign_in = async () => {
+        console.log('this function was called')
         try {
             await signInWithPopup(auth, googleProvider);
-            // context.setCurrentUser(response);
-            // var str = auth?.currentUser?.email;
-            // let usern = ' ' + str.substring(0, str.indexOf("@"));
-            // let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
-            // context.setCurrentUser(user_cred);
+
+            var str = auth?.currentUser?.email;
+            let username = ' ' + str.substring(0, str.indexOf("@"));
+            let user_cred = { id: auth.currentUser.getIdToken(), username: username.toUpperCase() };
+            context.setCurrentUser(user_cred);
 
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
 
     function create_user_layout() {

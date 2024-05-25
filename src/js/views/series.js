@@ -5,20 +5,12 @@ import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
-import md5 from "md5";
-
-import image1 from '../../img/captain.jpg';
-import image2 from '../../img/Sentri.jpg';
-import image3 from '../../img/Doom.jpg';
-import image4 from '../../img/Soldier.jpg';
-import image5 from '../../img/Doctor_Strange.jpeg';
-
 export const Series = () => {
 
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
-	const [randomImg, setRandomImg] = useState([]);
 	const [listSeries, setListSeries] = useState([]);
+	const [slideList, setSlideList] = useState([]);
 
 	useEffect(() => {
 		fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
@@ -42,15 +34,19 @@ export const Series = () => {
 					each_elm.type = (elm.type) ? 'Unknown' : elm.type;
 					newArray2.push(each_elm);
 				})
-
-				// var random_img_clone=[random_img[0].image,random_img[1].image,random_img[2].image,random_img[3].image,random_img[4].image];
-
 				setListSeries(newArray2);
-
-				let random_img = newArray2.filter((elm) => elm.image.indexOf('_not_') == -1).map(({ image }) => ({ image }));
-
-				setRandomImg(random_img);
-
+				let count = 0;
+			let 	random_image = newArray2
+				 .filter((elm) => {
+				   if (!(elm.image.includes('image_not_')) && count < 5) {
+					 count++;
+					 return true;
+				   }
+				   return false;
+				 })
+				 .map(elm => elm.image);
+				  setSlideList(random_image);
+			
 
 			})
 			.catch(error => console.error(error));
@@ -126,17 +122,12 @@ export const Series = () => {
 			</div>
 
 			<div className="slideshow3">
-				<img className="img_sl" src={image1} />
-				<img className=" img_sl" src={image2} />
-				<img className=" img_sl" src={image3} />
-				<img className=" img_sl" src={image4} />
-				<img className=" img_sl" src={image4} />
+			<img className="img_sl" src={slideList[4]} />
+				<img className=" img_sl" src={slideList[3]} />
+				<img className=" img_sl" src={slideList[2]} />
+				<img className=" img_sl" src={slideList[1]} />
+				<img className=" img_sl" src={slideList[0]} />
 
-				{/* <img className="img_sl" src={random_img[0]} />
-				<img className=" img_sl" src={random_img[1]} />
-				<img className=" img_sl" src={random_img[2]} />
-				<img className=" img_sl" src={random_img[3]} />
-				<img className=" img_sl" src={random_img[4]} /> */}
 
 			</div>
 
