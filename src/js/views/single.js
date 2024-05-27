@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/demo.css";
+import "../../styles/single.css";
 import { AppContext } from "../layout";
 import { auth } from '../../config/firebase';
 import { storage } from '../../config/firebase';
 import { db } from "../../config/firebase";
 import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from "firebase/storage"
-
+import imglink from "../../img/DyGeek.png";
 
 export const Single = () => {
 	const location = useLocation();
@@ -33,11 +33,11 @@ export const Single = () => {
 
 	};
 	useEffect(() => {
-		getMovies();
+		// getMovies();
 
 	}, []);
 
-	
+
 	const uploadmovie = async () => {
 
 		try {
@@ -94,59 +94,67 @@ export const Single = () => {
 
 
 	return (
-		<div className="demo_div ">
+		<div className="single_div ">
+
+
+			{/* <div class="search-container">
+
+				<input class="search expandright" id="searchright" type="search" name="q" placeholder="Search" />
+				<label class="button searchbutton" for="searchright"><span class="mglass">&#9906;</span></label>
+
+			</div> */}
+
+			<div className="row">
 
 
 
-			<ul >
-				{movies.map((element, index) =>
-					<li key={index} ><p>
+				<div className="col-2">
+					<nav className="navbar navbar-light " >
+						<a className="nav_link"><i className="fa-brands fa-tiktok fa-xl"></i></a>
+						<a className="nav_link"><i className="fa-brands fa-instagram fa-xl"></i></a>
+						<a className="nav_link"><i className="fa-brands fa-facebook fa-xl"></i></a>
+						<a className="nav_link"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
+						<a className="nav_link"><i className="fa-brands fa-youtube fa-xl"></i></a>
+					</nav>
+				</div>
 
-						Title: {element.Title}<br />
-						rating : {element.rating}<br />
-						Release: {element.release}
+				<div className="col">
 
-					</p></li>
-				)}
+					<img className="star_img" src={imglink} />
 
-
-			</ul>
-
-
-			<input className="form-control[[" type="file" onChange={(e) => setUploadF(e.target.files[0])} placeholder="Upload your file here" />
-			<button className="btn btn-light" onClick={() => uploadfile()}>Update  movie</button><br />
-
-
-			<button className="btn btn-success" onClick={() => updatemovie()}>Update  movie</button><br />
-			<button className="btn btn-danger" onClick={() => deleteMovie()}>Delete movie</button>
-
+					<ul>
+						<li><span className="nav_link  nav_test" onClick={() => navigate('/home')}>News</span></li>
+						<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
+						<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
+						<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
+					</ul>
 
 
+				</div>
+
+				<div className="col d-dlex">
+
+					<div className="dropdown">
+						<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" aria-haspopup="true" aria-expanded="false" onChange={(e) => search_function(e)} />
+
+						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
+
+							<span className="dropdown-item text-light"  >64u44h545y</span>
+
+						</div>
+					</div>
+
+					<button className="btn btn-outline-dark " type="submit" onClick={() => login_logout()}>
+						Wendy D</button>
 
 
-
-			{/* <div className="back_home">
-				<button className="back_button" onClick={()=>navigate('/')}>Back home</button>
+				</div>
 			</div>
 
-			<div className=""></div>
-				<div className="card h-25 card_demo" style={{width: "50%"}}>
-			<img src={data.image} className="card-img-top img_demo" alt="..."/>
-			<div className="card-body">
-			  <h5 className="card-title">{data.name}</h5>
-			  <p> Gender : Male<br/>
-			 
-			 Eye-Color :Brown</p>
-		<div className="learn_like">
-		<Link to="/">
-		<button className="btn btn-outline-primary" >Go back</button>
-		</Link>
-		<span><i className="fa-regular fa-heart fa-xl"></i></span>
-			  </div>
-			</div>
-		  </div>
 
-			 */}
 		</div>
+
+
+
 	);
 };

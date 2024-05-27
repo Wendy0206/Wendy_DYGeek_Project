@@ -73,7 +73,7 @@ export const Login = () => {
             let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
 
             context.setCurrentUser(user_cred);
-            navigate('/characters')
+            navigate('/')
         } catch (error) {
             const password = document.querySelector('.input_password');
             password.classList.add('is-invalid');
@@ -134,19 +134,19 @@ export const Login = () => {
                 <h3>Login Here</h3>
 
                 <label htmlFor="email">{userLabel[1]}</label>
-                <input className="input_email" type="text" placeholder="Email or Phone" value={userE} id="email" onChange={(e) => setUserE(e.target.value)} />
+                <input className="input_email all_input" type="text" placeholder="Email or Phone" value={userE} id="email" onChange={(e) => setUserE(e.target.value)} />
                 <div className="invalid-feedback">
                     Please choose a valid email
                 </div>
 
                 <label htmlFor="password">{userLabel[2]}</label>
-                <input className="input_password" type="password" placeholder="Password" value={userP} onChange={(e) => setUserP(e.target.value)} />
+                <input className="input_password all_input" type="password" placeholder="Password" value={userP} onChange={(e) => setUserP(e.target.value)} />
                 <div className="invalid-feedback">
                     {validationText[0]}
                 </div>
 
                 <label htmlFor="confirmPassword" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }}>{userLabel[0]}</label>
-                <input className="input_password2" type="password" placeholder="Reenter password" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }} value={userCP} id="confirmPassword" onChange={(e) => setUserCP(e.target.value)} />
+                <input className="input_password2 all_input" type="password" placeholder="Reenter password" style={userLabel[0] == 'Username' ? { display: 'none' } : { display: 'block' }} value={userCP} id="confirmPassword" onChange={(e) => setUserCP(e.target.value)} />
                 <div className="invalid-feedback">
                     {validationText[1]}
                 </div>

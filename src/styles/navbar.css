@@ -3,10 +3,7 @@
   transform: scale(1, 1);
 }
 
-#log_div {
-  height: 50px;
-  margin-top: 10px;
-}
+
 
 .dp_none {
   display: none;
@@ -38,3 +35,6 @@ ul>li {
 nav>a {
   color: inherit;
 }
+
+
+

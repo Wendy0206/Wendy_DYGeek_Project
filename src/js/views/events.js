@@ -145,7 +145,11 @@ export const Events = () => {
 									Description : {element.description}</p>
 							</div>
 							<div className="learn_like">
-								<Link to={`/demo/${element.name}`} state={element}> <button className="learn_button" >Learn More</button></Link>
+								{/* <Link to={`/demo/${element.name}`} state={element}> 
+								 */}
+								
+								<button className="learn_button" >Learn More</button>
+								{/* </Link> */}
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
 
 							</div>

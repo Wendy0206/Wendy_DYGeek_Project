@@ -101,84 +101,79 @@ export const Navbar = () => {
 				.catch(error => console.error(error));
 
 		}
-		// setSearchVal(val.target.value);
+
 
 	}
 
 	return (
-		<div className=" text-light pt-2 px-4 mb-2" style={{ backgroundColor: "black" }}>
-			<div className="row pt-2 " style={{ backgroundColor: "black" }}>
+		
+		<div className=" text-light px-4 mb-2" style={{ backgroundColor: "black" }}>
 
-				<div className="col ">
-					<nav className="navbar navbar-light " style={{ backgroundColor: "black" }}>
-						<a className="nav_link"><i className="fa-brands fa-tiktok fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-instagram fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-facebook fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-youtube fa-xl"></i></a>
-					</nav>
-				</div>
-				<div className="col-6"></div>
-				<div className="col-2">
+		<div className="row pt-2 " >
+			<div className="col ">
 
-					{/* <input className="form-control mr-m-6 w-100" type="search" placeholder="Search" aria-label="Search" /> */}
-					<div className="dropdown">
-						<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" aria-haspopup="true" aria-expanded="false" onChange={(e) => search_function(e)} />
+				<nav className="navbar navbar-light " >
+					<a className="nav_link"><i className="fa-brands fa-tiktok fa-xl"></i></a>
+					<a className="nav_link"><i className="fa-brands fa-instagram fa-xl"></i></a>
+					<a className="nav_link"><i className="fa-brands fa-facebook fa-xl"></i></a>
+					<a className="nav_link"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
+					<a className="nav_link"><i className="fa-brands fa-youtube fa-xl"></i></a>
+				</nav>
 
-						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
-							{/* className={(searchVal.length>2)? "dropdown-menu" :" dp_done"} */}
+			</div>
+			<div className="col"></div>
+			<div className="col pt-2">
 
-							{searchRes.map((elm, ind) =>
-								<span key={ind} className="dropdown-item text-light" onClick={() => lookup_character()} >{elm.name}</span>
+				<div className="dropdown">
+					<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" aria-haspopup="true" aria-expanded="false" onChange={(e) => search_function(e)} />
 
-							)}
+					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
+						{searchRes.map((elm, ind) =>
+							<span key={ind} className="dropdown-item text-light" onClick={() => lookup_character()} >{elm.name}</span>
+
+						)}
 
 
-						</div>
 					</div>
-
-
-
-				</div>
-				<div className="col-1 mt-3 ml3" id="log_div" >
-					<button className="btn btn-outline-light " type="submit" onClick={() => login_logout()}>
-						<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
 				</div>
 
 			</div>
-
-			<div className="row">
-				<div className="col-4"></div>
-				<div className="col">
-					<img className="star_img" src={imglink} />
-				</div>
-				<div className="col-4"></div>
-
-			</div>
-
-			<div className="row dark">
-				<div className="col"></div>
-				<div className="col ">
-					<nav className="navbar navbar-expand-lg d-flex justif-content-between">
-
-						<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-							<div className="navbar-nav">
-								<ul>
-									<li><span className="nav_link  nav_test" onClick={() => navigate('/home')}>News</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
-									<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
-								</ul>
-
-							</div>
-
-						</div>
-
-					</nav>
-				</div>
-				<div className="col"></div>
-
+			<div className="col-1 pt-2" id="log_div" >
+				<button className="btn btn-outline-light " type="submit" onClick={() => login_logout()}>
+					<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
 			</div>
 		</div>
+
+		<div className="row">
+			<div className="col-4"></div>
+			<div className="col">
+				<img className="star_img" src={imglink} />
+			</div>
+			<div className="col-4"></div>
+
+		</div>
+
+		<div className="row dark">
+			<div className="col"></div>
+			<div className="col ">
+				<nav className="navbar navbar-expand-lg d-flex justif-content-between">
+
+
+					<div className="navbar-nav">
+						<ul>
+							<li><span className="nav_link  nav_test" >News</span></li>
+							<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
+							<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
+							<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
+						</ul>
+
+					</div>
+
+				</nav>
+			</div>
+			<div className="col"></div>
+
+		</div>
+	</div>
 	);
 };
