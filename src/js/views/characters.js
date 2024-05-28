@@ -209,7 +209,7 @@ export const Characters = () => {
 
 
 						{listC.map((element, index) =>
-							<div key={index} className="card" style={{ width: "15rem", height: "" }}>
+							<div key={index} className="card card_size" >
 								<img src={element.image} className="card-img-top card_img" alt="..." />
 
 								<div className="card-body h-50">

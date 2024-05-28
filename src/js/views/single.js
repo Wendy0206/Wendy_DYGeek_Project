@@ -19,6 +19,9 @@ export const Single = () => {
 	const moviesCollectionRef = collection(db, 'Movies');
 	const [uploadF, setUploadF] = useState(null);
 
+	const [searchVal, setSearchVal] = useState('');
+	const [searchRes, setSearchRes] = useState([]);
+
 	const getMovies = async () => {
 		try {
 			const data = await getDocs(moviesCollectionRef);
@@ -97,59 +100,60 @@ export const Single = () => {
 		<div className="single_div ">
 
 
-			{/* <div class="search-container">
 
-				<input class="search expandright" id="searchright" type="search" name="q" placeholder="Search" />
-				<label class="button searchbutton" for="searchright"><span class="mglass">&#9906;</span></label>
+			<nav class="navbar navbar-expand-lg navbar-light bg-dark w-100">
 
-			</div> */}
+				<img className="img_brand" src={imglink} />
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<div className="route_div">
+						<ul class="navbar-nav">
+							<li class="nav-item active">
+								<span class="nav-link" >News</span>
+							</li>
 
-			<div className="row">
+							<li class="nav-item active">
+								<span class="nav-link" >Characters</span>
+							</li>
+							<li class="nav-item">
+								<span class="nav-link">Series</span>
+							</li>
+							<li class="nav-item">
+								<span class="nav-link" >Events</span>
+							</li>
 
-
-
-				<div className="col-2">
-					<nav className="navbar navbar-light " >
-						<a className="nav_link"><i className="fa-brands fa-tiktok fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-instagram fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-facebook fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
-						<a className="nav_link"><i className="fa-brands fa-youtube fa-xl"></i></a>
-					</nav>
-				</div>
-
-				<div className="col">
-
-					<img className="star_img" src={imglink} />
-
-					<ul>
-						<li><span className="nav_link  nav_test" onClick={() => navigate('/home')}>News</span></li>
-						<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
-						<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
-						<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
-					</ul>
+						</ul>
+						<div className="d-flex" >
 
 
-				</div>
 
-				<div className="col d-dlex">
+							<div className="">
+								<div class="search-box " >
+									<button class="btn-search"><i class="fas fa-search"></i></button>
+									<input type="text" class="input-search" placeholder="Type to Search..." />
+								</div>
 
-					<div className="dropdown">
-						<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" aria-haspopup="true" aria-expanded="false" onChange={(e) => search_function(e)} />
+								<div className="" style={{ backgroundColor: "red", display: "none" }}>
 
-						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
+									<span className="dropdown-item text-light" >fekfnqeknfe</span>
+									<span className="dropdown-item text-light" >fekfnqeknfe</span>
+									<span className="dropdown-item text-light" >fekfnqeknfe</span>
 
-							<span className="dropdown-item text-light"  >64u44h545y</span>
+								</div>
+							</div>
 
+							<button className="btn btn-dark">wrgrgwrgrwg</button>
 						</div>
+
+
 					</div>
 
-					<button className="btn btn-outline-dark " type="submit" onClick={() => login_logout()}>
-						Wendy D</button>
-
-
 				</div>
-			</div>
+			</nav>
+
+
 
 
 		</div>
