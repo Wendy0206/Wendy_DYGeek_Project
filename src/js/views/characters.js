@@ -5,6 +5,7 @@ import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 import { Loader } from '../component/loader'
+import { auth, googleProvider } from '../../config/firebase';
 
 
 export const Characters = () => {
@@ -23,11 +24,8 @@ export const Characters = () => {
 	const getCharacters = async () => {
 		// let random_ts = Math.floor(Math.random() * 9) + 1;
 		// 	console.log('This is a test, we are going to generate a random ts for our marvel API ' + random_ts);
-		setIsDataLoading(true);
-		await downloadCharacters();
-		console.log(' we get our data now remove the loader');
-		setIsDataLoading(false);
-
+		 await downloadCharacters();
+		 setIsDataLoading(false);
 	}
 
 
@@ -54,7 +52,7 @@ export const Characters = () => {
 					each_elm.series = elm.series.available;
 					newArray2.push(each_elm);
 				})
-				
+
 
 				let count = 0;
 				random_image = newArray2
@@ -70,68 +68,36 @@ export const Characters = () => {
 				setListC(newArray2);
 
 			})
-			.catch(error => console.error(error));
-
+			.catch(error => { console.error(error); return false; });
+	return true;
 	}
 
 
 
 	function addFavorite(elm, pos) {
-		let newArray2 = context.favList.find((element) => element == elm);
+		
+		if (context.currentUser.token) {
+		
+			let newArray2 = context.favList.find((element) => element == elm);
 
-		if (!newArray2) {
-			let newArray = [...context.favList];
+			if (!newArray2) {
+				let newArray = [...context.favList];
 
-			newArray.push(listC[pos]);
-			context.setFavList(newArray);
-			fetch_add_fav(listC[pos].id);
+				newArray.push(listC[pos]);
+				context.setFavList(newArray);
+				fetch_add_fav(listC[pos].id);
 
-		}
-		else {
-
-			let newArray = context.favList.filter((element, index) => element != elm);
-			fetch_remove_fav(listC[pos].id)
-			context.setFavList(newArray);
-
-		}
-	}
-
-	function fetch_add_fav(fav) {
-		let testArray = [context.currentUser.id, fav];
-
-		console.log('char id to add ' + fav)
-		fetch('', {
-			method: 'POST', // or 'POST'
-			body: JSON.stringify(testArray),
-			headers: {
-				'Content-Type': 'application/json'
 			}
-		})
-			.then(res => {
-				if (!res.ok) throw Error(res.statusText);
-				return res.json();
-			})
-			.then(response => console.log('Success:', response))
-			.catch(error => console.error(error));
+			else {
 
-	}
+				let newArray = context.favList.filter((element, index) => element != elm);
+				fetch_remove_fav(listC[pos].id)
+				context.setFavList(newArray);
 
-
-	function fetch_remove_fav(fav) {
-		let testArray = [context.currentUser.id, fav];
-		fetch('', {
-			method: 'DELETE', // or 'POST'
-			body: JSON.stringify(testArray),
-			headers: {
-				'Content-Type': 'application/json'
 			}
-		})
-			.then(res => {
-				if (!res.ok) throw Error(res.statusText);
-				return res.json();
-			})
-			.then(response => console.log('Success:', response))
-			.catch(error => console.error(error));
+		} else {
+			navigate('/login');
+		}
 	}
 
 
@@ -165,35 +131,36 @@ export const Characters = () => {
 
 
 	return (
-		<>
+
+
+		<div className="container catalog_div">
+
+
+			<div className=" d-flex justify-content-between">
+				<div className="dropdown text-start ">
+					<button
+						className="fav_button px-3 dropdown-toggle"
+						type="button"
+						id="dropdownMenuButton"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
+						Filter
+					</button>
+					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics (High-Low)</span></li>
+						<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Series (High-Low)</span></li>
+
+					</ul>
+				</div>
+
+				<button className="fav_button" onClick={() => navigate("/single")}>Favorites <span className="suptest">{context.favList.length}</span> </button>
+
+			</div>
 			{isDataLoading ? <Loader /> :
-				<div className="container catalog_div">
-
-
-					<div className=" d-flex justify-content-between pt-2">
-						<div className="dropdown text-start ">
-							<button
-								className="fav_button px-3 dropdown-toggle"
-								type="button"
-								id="dropdownMenuButton"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
-								Filter
-							</button>
-							<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
-								<li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>Name (A-Z)</span></li>
-								<li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Comics (High-Low)</span></li>
-								<li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Series (High-Low)</span></li>
-
-							</ul>
-						</div>
-
-						<button className="fav_button" onClick={() => navigate("/single")}>Favorites <span className="suptest">{context.favList.length}</span> </button>
-
-					</div>
-
+				<>
 					<div className="slideshow3">
 						<img className="img_sl" src={slideList[4]} />
 						<img className=" img_sl" src={slideList[3]} />
@@ -232,9 +199,9 @@ export const Characters = () => {
 							</div>
 						)}
 					</div>
+				</>}
+		</div>
 
-				</div>
-			}</>
 	);
 
 }

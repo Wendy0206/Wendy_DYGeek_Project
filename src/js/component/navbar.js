@@ -15,9 +15,6 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 	const [searchVal, setSearchVal] = useState('');
 	const [searchRes, setSearchRes] = useState([]);
-	const [width, setWidth] = useState(window.innerWidth);
-
-	// window.addEventListener('resize', (e) => console.log('THis is our window screen width now', window.innerWidth));
 
 	function login_logout() {
 
@@ -46,67 +43,70 @@ export const Navbar = () => {
 
 
 
-	function search_function(val) {
+	const search_function = (val) => {
+
 		setSearchVal(val.target.value);
-
 		let search_val = val.target.value;
-
 		if (search_val.length < 2) {
-			let clear_search = [];
-			setSearchRes(clear_search);
+			let clear_res=[]
+			setSearchRes(clear_res);
+			return;
 		}
 
 		else {
-
-			let newObj = { name: val.target.value };
-
-
-			fetch('https://marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com/name?q=' + newObj.name, {
-
-				method: 'GET',
-				headers: {
-					'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
-					'X-RapidAPI-Host': 'marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com'
-				}
-
-			})
-				.then(res => {
-					if (!res.ok) {
-
-
-						let newArray = [{ name: 'No matching characters found' }];
-						setSearchRes(newArray);
-
-
-					}
-					return res.json();
-
-				})
-				.then(response => {
-
-					let newArray = [];
-
-
-					response.map((elm) => {
-						let each_elm = {}
-						each_elm.name = elm.name;
-						each_elm.id = elm.id;
-						each_elm.description = elm.description;
-						//	each_elm.image=
-						// each_elm.quote= elm.quote[0];	
-						newArray.push(each_elm);
-					})
-
-
-					setSearchRes(newArray);
-
-				})
-				.catch(error => console.error(error));
-
+			search_characters(val.target.value);
+			
 		}
 
 
 	}
+
+
+	const search_characters = (name) => {
+		fetch('https://marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com/name?q=' + name, {
+
+			method: 'GET',
+			headers: {
+				'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
+				'X-RapidAPI-Host': 'marvel-heroic-api-unlock-the-mcu-legendary-characters.p.rapidapi.com'
+			}
+
+		})
+			.then(res => {
+				if (!res.ok) {
+
+					let newArray = [{ name: 'No matching characters found' }];
+					setSearchRes(newArray);
+
+				}
+				return res.json();
+
+			})
+			.then(response => {
+
+				let newArray = [];
+
+				response.map((elm) => {
+					let each_elm = {}
+					each_elm.name = elm.name;
+					each_elm.id = elm.id;
+					each_elm.description = elm.description;
+					//	each_elm.image=
+					// each_elm.quote= elm.quote[0];	
+					newArray.push(each_elm);
+				})
+
+					setSearchRes(newArray);
+			
+			})
+			.catch(error => { return false });
+	}
+
+	const expand_search=()=>{
+	let open_search=	document.querySelector('.input-search');
+	open_search.classList.toggle('.input_expand');
+	}
+
 
 	return (
 
@@ -136,8 +136,8 @@ export const Navbar = () => {
 						<div className="search_l_div" >
 
 							<div className="search_login_div">
-								<div class="search-box" >
-									<button class="btn-search"><i class="fas fa-search"></i></button>
+								<div class="search-box " >
+									<button class="btn-search" onClick={()=> expand_search()}><i class="fas fa-search"></i></button>
 									<input class="input-search" placeholder="Search your character" type="search" value={searchVal} onChange={(e) => search_function(e)} />
 								</div>
 
@@ -149,7 +149,7 @@ export const Navbar = () => {
 
 								</div>
 							</div>
-							<button className="button-81 mx-2" type="submit" onClick={() => login_logout()}>
+							<button className="button-81 mx-3" type="submit" onClick={() => login_logout()}>
 								<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
 
 						</div>
@@ -167,76 +167,5 @@ export const Navbar = () => {
 
 
 
-
-
-
-		// <div className=" text-light px-4 mb-2" style={{ backgroundColor: "black" }}>
-
-		// 	<div className="row pt-2 " >
-		// 		<div className="col ">
-
-		// 			<nav className="navbar navbar-light " >
-		// 				<a className="nav_link"><i className="fa-brands fa-tiktok fa-xl"></i></a>
-		// 				<a className="nav_link"><i className="fa-brands fa-instagram fa-xl"></i></a>
-		// 				<a className="nav_link"><i className="fa-brands fa-facebook fa-xl"></i></a>
-		// 				<a className="nav_link"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
-		// 				<a className="nav_link"><i className="fa-brands fa-youtube fa-xl"></i></a>
-		// 			</nav>
-
-		// 		</div>
-		// 		<div className="col"></div>
-		// 		<div className="col pt-2">
-
-		// 			<div className="dropdown">
-		// 				<input className="form-control mr-m-6 w-100 dropdown-toggle" type="search" value={searchVal} aria-label="Search" id="dropdownMenuButton" data-bs-toggle="dropdown" placeholder="Search your character" onChange={(e) => search_function(e)} />
-
-		// 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: "black" }}>
-		// 					{searchRes.map((elm, ind) =>
-		// 						<span key={ind} className="dropdown-item text-light" onClick={() => lookup_character()} >{elm.name}</span>
-
-		// 					)}
-
-
-		// 				</div>
-		// 			</div>
-
-		// 		</div>
-		// 		<div className="col-1 pt-2" id="log_div" >
-		// 			<button className="btn btn-outline-light " type="submit" onClick={() => login_logout()}>
-		// 				<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
-		// 		</div>
-		// 	</div>
-
-		// 	<div className="row">
-		// 		<div className="col-4"></div>
-		// 		<div className="col">
-		// 			<img className="star_img" src={imglink} />
-		// 		</div>
-		// 		<div className="col-4"></div>
-
-		// 	</div>
-
-		// 	<div className="row dark">
-		// 		<div className="col"></div>
-		// 		<div className="col ">
-		// 			<nav className="navbar navbar-expand-lg d-flex justif-content-between">
-
-
-		// 				<div className="navbar-nav">
-		// 					<ul>
-		// 						<li><span className="nav_link  nav_test" >News</span></li>
-		// 						<li><span className="nav_link nav_test" onClick={() => navigate('/')}>Characters</span></li>
-		// 						<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
-		// 						<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
-		// 					</ul>
-
-		// 				</div>
-
-		// 			</nav>
-		// 		</div>
-		// 		<div className="col"></div>
-
-		// 	</div>
-		// </div>
 	);
 };

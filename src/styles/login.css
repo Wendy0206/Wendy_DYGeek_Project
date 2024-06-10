@@ -18,12 +18,10 @@ span {
     justify-content: center;
     align-content: center;
     min-height: 85vh;
+    background-color: rgb(107, 104, 104);
 
 }
 
-body {
-    background-color: rgb(100, 98, 98);
-}
 
 .background {
     width: 430px;

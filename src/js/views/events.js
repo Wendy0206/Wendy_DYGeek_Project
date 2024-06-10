@@ -4,7 +4,8 @@ import { useState, useEffect, useContext } from "react";
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
-
+import { Loader } from '../component/loader'
+import { auth, googleProvider } from '../../config/firebase';
 
 export const Events = () => {
 
@@ -12,10 +13,24 @@ export const Events = () => {
 	const navigate = useNavigate();
 	const [listEvents, setListEvents] = useState([]);
 	const [slideList, setSlideList] = useState([]);
+	const [isDataLoading, setIsDataLoading] = useState(true);
 
 	useEffect(() => {
 
+		getEvents();
 
+	}, []);
+
+
+	const getEvents = async () => {
+		await downloadEvents();
+		setIsDataLoading(false);
+
+	}
+
+
+
+	const downloadEvents = async () => {
 
 		fetch('https://gateway.marvel.com/v1/public/events?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
@@ -59,8 +74,8 @@ export const Events = () => {
 			})
 			.catch(error => console.error(error));
 
+	}
 
-	}, []);
 
 	const sortTitle = (a, b) => {
 		let nameA = a.title.toUpperCase();
@@ -93,7 +108,6 @@ export const Events = () => {
 
 
 	return (
-
 		<div className="container catalog_div">
 
 			<div className=" d-flex justify-content-between pt-2">
@@ -105,7 +119,7 @@ export const Events = () => {
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						{/* <i className="fa-solid fa-sliders fa-2xl"></i> */}
+
 						Filter
 					</button>
 					<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
@@ -128,35 +142,36 @@ export const Events = () => {
 
 			</div>
 
+			{isDataLoading ? <Loader /> :
 
-			<div className="list_div">
+				<div className="list_div">
 
+					{listEvents.map((element, index) =>
+						<div key={index} className="card" style={{ width: "15rem" }}>
+							<img src={element.image} className="card-img-top card_img" alt="..." />
 
-
-				{listEvents.map((element, index) =>
-					<div key={index} className="card" style={{ width: "15rem" }}>
-						<img src={element.image} className="card-img-top card_img" alt="..." />
-
-						<div className="card-body h-50">
-							<div className="card_center_div">
-								<h5 className="card-title">{element.title}</h5>
-								<p>
-									Start: {element.start}<br />
-									Description : {element.description}</p>
-							</div>
-							<div className="learn_like">
-								{/* <Link to={`/demo/${element.name}`} state={element}> 
+							<div className="card-body h-50">
+								<div className="card_center_div">
+									<h5 className="card-title">{element.title}</h5>
+									<p>
+										Start: {element.start}<br />
+										Description : {element.description}</p>
+								</div>
+								<div className="learn_like">
+									{/* <Link to={`/demo/${element.name}`} state={element}> 
 								 */}
-								
-								<button className="learn_button" >Learn More</button>
-								{/* </Link> */}
-								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
 
+									<button className="learn_button" >Learn More</button>
+									{/* </Link> */}
+									<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
+
+								</div>
 							</div>
 						</div>
-					</div>
-				)}
-			</div>
+					)}
+				</div>
+			}
 		</div>
+
 	);
 }

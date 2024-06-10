@@ -4,6 +4,8 @@ import { useState, useEffect, useContext } from "react";
 import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
+import { Loader } from '../component/loader'
+import { auth, googleProvider } from '../../config/firebase';
 
 
 export const Series = () => {
@@ -12,8 +14,20 @@ export const Series = () => {
 	const navigate = useNavigate();
 	const [listSeries, setListSeries] = useState([]);
 	const [slideList, setSlideList] = useState([]);
+	const [isDataLoading, setIsDataLoading] = useState(true);
 
 	useEffect(() => {
+getSeries();
+	}, []);
+
+	const getSeries= async()=>{
+	await downloadSeries();
+	setIsDataLoading(false);		
+	}
+
+
+
+	const downloadSeries= async()=>{
 		fetch('https://gateway.marvel.com/v1/public/series?ts=1&apikey=727378f140539c0b271e37b49cf9d9d6&hash=2f0a5da5cea5906c98b7a0005ee18982')
 			.then(res => {
 				if (!res.ok) throw Error(res.statusText);
@@ -51,9 +65,9 @@ export const Series = () => {
 
 			})
 			.catch(error => console.error(error));
-	}, []);
 
-
+return true;
+	}
 
 	const sortTitle = (a, b) => {
 		let nameA = a.title.toUpperCase();
@@ -91,10 +105,9 @@ export const Series = () => {
 	}
 
 
-
-
-
 	return (
+		<>
+		{isDataLoading ? <Loader/> :
 
 		<div className="container catalog_div">
 
@@ -128,14 +141,11 @@ export const Series = () => {
 				<img className=" img_sl" src={slideList[2]} />
 				<img className=" img_sl" src={slideList[1]} />
 				<img className=" img_sl" src={slideList[0]} />
-
-
 			</div>
 
 		
+		
 			<div className="list_div">
-
-
 
 				{listSeries.map((element, index) =>
 					<div key={index} className="card" style={{ width: "15rem" }}>
@@ -159,6 +169,8 @@ export const Series = () => {
 					</div>
 				)}
 			</div>
+
 		</div>
+}</>
 	);
 }
