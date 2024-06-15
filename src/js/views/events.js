@@ -5,7 +5,6 @@ import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../layout";
 import { Loader } from '../component/loader'
-import { auth, googleProvider } from '../../config/firebase';
 
 export const Events = () => {
 
@@ -147,7 +146,7 @@ export const Events = () => {
 				<div className="list_div">
 
 					{listEvents.map((element, index) =>
-						<div key={index} className="card" style={{ width: "15rem" }}>
+						<div key={index} className="card card_size" >
 							<img src={element.image} className="card-img-top card_img" alt="..." />
 
 							<div className="card-body h-50">

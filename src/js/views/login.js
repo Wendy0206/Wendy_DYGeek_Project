@@ -69,9 +69,7 @@ export const Login = () => {
             await signInWithEmailAndPassword(auth, userE, userP);
             var str = auth?.currentUser?.email;
             let usern = ' ' + str.substring(0, str.indexOf("@"));
-
-            let user_cred = { id: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
-
+            let user_cred = { token: auth.currentUser.getIdToken(), username: usern.toUpperCase() };
             context.setCurrentUser(user_cred);
             navigate('/')
         } catch (error) {

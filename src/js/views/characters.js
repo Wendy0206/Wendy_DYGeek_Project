@@ -173,8 +173,6 @@ export const Characters = () => {
 
 					<div className="list_div">
 
-
-
 						{listC.map((element, index) =>
 							<div key={index} className="card card_size" >
 								<img src={element.image} className="card-img-top card_img" alt="..." />
