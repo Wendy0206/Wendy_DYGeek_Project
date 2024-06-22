@@ -41,7 +41,7 @@ getSeries();
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
-					each_elm.title = elm.title;
+					each_elm.name = elm.title;
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
 					each_elm.description = (elm.description != null) ? elm.description.slice(0, 40) + '...' : 'Unfortunately there is no description here...'
@@ -70,8 +70,8 @@ return true;
 	}
 
 	const sortTitle = (a, b) => {
-		let nameA = a.title.toUpperCase();
-		let nameB = b.title.toUpperCase();
+		let nameA = a.name.toUpperCase();
+		let nameB = b.name.toUpperCase();
 		if (nameA < nameB) return -1;
 		if (nameA > nameB) return 1;
 	}
@@ -153,13 +153,13 @@ return true;
 
 						<div className="card-body h-50">
 							<div className="card_center_div">
-								<h5 className="card-title">{element.title}</h5>
+								<h5 className="card-title">{element.name}</h5>
 								<p>Type : {element.type} <br />
 									Start : {element.start}	<br />
 									Description : {element.description}</p>
 							</div>
 							<div className="learn_like">
-								{/* <Link to={`/demo/${element.title}`} state={element}> */}
+								{/* <Link to={`/demo/${element.name}`} state={element}> */}
 									 <button className="learn_button" >Learn More</button>
 									 {/* </Link> */}
 								<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

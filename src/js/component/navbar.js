@@ -53,7 +53,7 @@ export const Navbar = () => {
 			return;
 		}
 
-		else {
+		else if(search_val.length%2==0 && search_val.length>1 ) {
 			search_characters(val.target.value);
 			
 		}
@@ -111,7 +111,7 @@ export const Navbar = () => {
 	return (
 
 
-		<div className="">
+		<div>
 
 
 

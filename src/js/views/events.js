@@ -44,7 +44,7 @@ export const Events = () => {
 				let newArray2 = [];
 				newArray.map((elm) => {
 					let each_elm = {}
-					each_elm.title = elm.title;
+					each_elm.name = elm.title;
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
 					each_elm.description = (elm.description != null) ? elm.description.slice(0, 50) + '...' : 'Unfortunately there is no description on this one...'
@@ -151,14 +151,13 @@ export const Events = () => {
 
 							<div className="card-body h-50">
 								<div className="card_center_div">
-									<h5 className="card-title">{element.title}</h5>
+									<h5 className="card-title">{element.name}</h5>
 									<p>
 										Start: {element.start}<br />
 										Description : {element.description}</p>
 								</div>
 								<div className="learn_like">
-									{/* <Link to={`/demo/${element.name}`} state={element}> 
-								 */}
+									{/* <Link to={`/demo/${element.name}`} state={element}>  */}
 
 									<button className="learn_button" >Learn More</button>
 									{/* </Link> */}

@@ -10,6 +10,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Faq } from "./component/faq";
 import { Login } from "./views/login";
 import { Characters } from "./views/characters";
 import { Series } from "./views/series";
@@ -25,7 +26,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	const [favList, setFavList] = useState([]);
-	const [currentUser, setCurrentUser] = useState({ token:null, username: ' Login' });
+	const [currentUser, setCurrentUser] = useState({ token: null, username: ' Login' });
 
 
 	return (
@@ -44,6 +45,7 @@ const Layout = () => {
 							<Route path="/" element={<Characters />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/series" element={<Series />} />
+							<Route path="/faq" element={<Faq />} />
 							<Route path="/events" element={<Events />} />
 							<Route path="/demo/:ind" element={<Demo />} />
 							<Route path="/single" element={<Single />} />

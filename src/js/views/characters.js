@@ -5,7 +5,7 @@ import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 import { Loader } from '../component/loader'
-import { auth, googleProvider } from '../../config/firebase';
+
 
 
 export const Characters = () => {
@@ -15,6 +15,7 @@ export const Characters = () => {
 	const [listC, setListC] = useState([]);
 	const [slideList, setSlideList] = useState([]);
 	const [isDataLoading, setIsDataLoading] = useState(true);
+
 	useEffect(() => {
 
 		getCharacters();
@@ -72,24 +73,18 @@ export const Characters = () => {
 	return true;
 	}
 
-
-
 	function addFavorite(elm, pos) {
 		
 		if (context.currentUser.token) {
-		
 			let newArray2 = context.favList.find((element) => element == elm);
 
 			if (!newArray2) {
 				let newArray = [...context.favList];
-
 				newArray.push(listC[pos]);
 				context.setFavList(newArray);
 				fetch_add_fav(listC[pos].id);
-
 			}
 			else {
-
 				let newArray = context.favList.filter((element, index) => element != elm);
 				fetch_remove_fav(listC[pos].id)
 				context.setFavList(newArray);
@@ -100,15 +95,12 @@ export const Characters = () => {
 		}
 	}
 
-
-
 	const sortName = (a, b) => {
 		let nameA = a.name.toUpperCase();
 		let nameB = b.name.toUpperCase();
 		if (nameA < nameB) return -1;
 		if (nameA > nameB) return 1;
 	}
-
 
 	const sortComics = (a, b) => a.comics - b.comics;
 	const sortSeries = (a, b) => a.series - b.series;
@@ -128,13 +120,8 @@ export const Characters = () => {
 	}
 
 
-
-
 	return (
-
-
 		<div className="container catalog_div">
-
 
 			<div className=" d-flex justify-content-between">
 				<div className="dropdown text-start ">
@@ -186,9 +173,9 @@ export const Characters = () => {
 
 									</div>
 									<div className="learn_like">
-										{/* <Link to={`/demo/${element.name}`} state={element}> */}
+										<Link to={`/demo/${element.name}`} state={element}>
 										<button className="learn_button" >Learn More</button>
-										{/* </Link> */}
+										</Link>
 
 										<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>
 
