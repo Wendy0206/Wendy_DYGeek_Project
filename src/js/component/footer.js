@@ -30,7 +30,7 @@ export const Footer = () => {
           </div>
           <div class="col-md-6 item text">
             <h3>Dygeek</h3>
-            <p>Welcome to <strong>Dygeek</strong>, your ultimate destination for all things Marvel! Dive into a universe where superheroes and villains collide, where iconic characters like Spider-Man, Iron Man, and the Avengers come to life. Explore in-depth analyses of beloved comics, stay updated on the latest Marvel events and series, and discover exclusive insights into the Marvel Cinematic Universe  </p>
+            <p>Welcome to <strong>Dygeek</strong>, your ultimate destination for all things Marvel! Dive into a universe where superheroes and villains collide, where iconic characters like Spider-Man, Iron Man, and the Avengers come to life. Explore in-depth analyses of beloved comics, stay updated on the latest Marvel events and series, and discover exclusive insights into the Marvel Cinematic Universe </p>
            
           </div>
           <div class="col item social"><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-brands fa-linkedin"></i></a><a href="#"><i class="fa-brands fa-github"></i></a></div>
