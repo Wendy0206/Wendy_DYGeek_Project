@@ -1,10 +1,8 @@
 import React from "react";
-import { RotatingLines } from "react-loader-spinner";
-import ClipLoader from "react-spinners/ClipLoader";
+import { TailSpin } from "react-loader-spinner";
 import "../../styles/home.css";
 
 export function Loader() {
-  console.log('this function was called in the Loader check this out')
   return (
     <div className="catalog_div">
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
-
+import { TailSpin } from "react-loader-spinner";
 import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
@@ -14,7 +14,7 @@ export const Characters = () => {
 	const navigate = useNavigate();
 	const [listC, setListC] = useState([]);
 	const [slideList, setSlideList] = useState([]);
-	const [isDataLoading, setIsDataLoading] = useState(true);
+	const [isDataLoading, setIsDataLoading] = useState(false);
 
 	useEffect(() => {
 
@@ -23,10 +23,14 @@ export const Characters = () => {
 	}, []);
 
 	const getCharacters = async () => {
-		// let random_ts = Math.floor(Math.random() * 9) + 1;
-		// 	console.log('This is a test, we are going to generate a random ts for our marvel API ' + random_ts);
-		 await downloadCharacters();
-		 setIsDataLoading(false);
+		try {
+			setIsDataLoading(true);
+			await downloadCharacters();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsDataLoading(false);
+		}
 	}
 
 
@@ -70,11 +74,11 @@ export const Characters = () => {
 
 			})
 			.catch(error => { console.error(error); return false; });
-	return true;
+
 	}
 
 	function addFavorite(elm, pos) {
-		
+
 		if (context.currentUser.token) {
 			let newArray2 = context.favList.find((element) => element == elm);
 
@@ -146,7 +150,7 @@ export const Characters = () => {
 				<button className="fav_button" onClick={() => navigate("/single")}>Favorites <span className="suptest">{context.favList.length}</span> </button>
 
 			</div>
-			{isDataLoading ? <Loader /> :
+			{isDataLoading ? <TailSpin color="red" radius={"8px"} /> :
 				<>
 					<div className="slideshow3">
 						<img className="img_sl" src={slideList[4]} />
@@ -174,7 +178,7 @@ export const Characters = () => {
 									</div>
 									<div className="learn_like">
 										<Link to={`/demo/${element.name}`} state={element}>
-										<button className="learn_button" >Learn More</button>
+											<button className="learn_button" >Learn More</button>
 										</Link>
 
 										<span onClick={() => addFavorite(element, index)}><i className={context.favList.includes(element) ? "fa-solid fa-heart fa-bounce fa-2xl testred" : "fa-regular fa-heart fa-2xl fa-bounce "}></i></span>

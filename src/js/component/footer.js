@@ -7,7 +7,7 @@ export const Footer = () => {
   const navigate = useNavigate();
 
   return (
-  <div class="footer-dark">
+  <div class="footer-dark mt-3">
     <footer>
       <div class="container">
         <div class="row">
