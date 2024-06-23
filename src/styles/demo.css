@@ -19,9 +19,14 @@
 	box-sizing: border-box;
 }
 
+h1{
+	font-size: 40px;
+	color: black;
+	font-weight: 600;
+}
+
 .ul_demo {
 	list-style-position: inside;
-    font-family: 'Gloria Hallelujah', cursive;
 	width: 100%;
 	background: white;
     color: black;
@@ -36,6 +41,7 @@
 	padding: 0 0 0 1rem;
 	cursor: pointer;
     color: black;
+	font-size: 1.5em;
 }
 
 .ul_demo> li:hover {

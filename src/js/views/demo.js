@@ -51,7 +51,7 @@ export const Demo = () => {
 	<button className="btn btn-primary" onClick={()=>navigate('/')}>Back home</button>
 	</div>
 
-<h1 className="text-center mb-3">{data.name} List of comics</h1>
+<h1 className="text-center mb-3 ">{data.name} List of comics</h1>
 		<div className="demo_div">
 <ul className="ul_demo">
 	 {learMore.map((elm, ind) =>

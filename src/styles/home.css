@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+*{
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .catalog_div {
   width: 100%;
   min-height: 80vh;
@@ -77,8 +81,7 @@ span {
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
-  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
-  font-size: 16px;
+   font-size: 16px;
   font-weight: bold;
   opacity: 1;
   outline: 0 solid transparent;
@@ -103,7 +106,6 @@ span {
   box-sizing: border-box;
   color: #36395A;
   cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
   height: 48px;
   padding-left: 10px;
   padding-right: 10px;
