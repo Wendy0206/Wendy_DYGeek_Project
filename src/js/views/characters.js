@@ -151,7 +151,7 @@ export const Characters = () => {
 	return (
 		<div className="container catalog_div">
 
-			<div className=" d-flex justify-content-between">
+			<div className=" d-flex justify-content-between mt-3">
 				<div className="dropdown text-start ">
 					<button
 						className="fav_button px-3 dropdown-toggle"
