@@ -55,8 +55,7 @@ export const Login = () => {
         try {
             let response = await createUserWithEmailAndPassword(auth, userE, userP);
             create_user_layout();
-            // console.log('Lets see what google create account return :');
-
+          
 
         } catch (error) {
             alert(error.message);
@@ -88,6 +87,7 @@ export const Login = () => {
             let username = ' ' + str.substring(0, str.indexOf("@"));
             let user_cred = { id: auth.currentUser.getIdToken(), username: username.toUpperCase() };
             context.setCurrentUser(user_cred);
+            navigate('/');
 
         } catch (error) {
             console.error(error);

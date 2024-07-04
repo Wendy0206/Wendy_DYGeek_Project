@@ -11,20 +11,38 @@ export const Events = () => {
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
 	const [listEvents, setListEvents] = useState([]);
-	const [slideList, setSlideList] = useState([]);
-	const [isDataLoading, setIsDataLoading] = useState(true);
+	const [slideList, setSlideList] = useState(['https://cdn.marvel.com/content/1x/dpool2024004_marvelvsalien.jpg',
+		'https://cdn.marvel.com/content/1x/uncx2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/aven2023018_cover.jpg',
+		'https://cdn.marvel.com/content/1x/xfact2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/phx2024002_cov.jpg']);
+	
 
 	useEffect(() => {
 
-		getEvents();
+		let check_storage = JSON.parse(sessionStorage.getItem('allevents'));
+		if (!check_storage) {
+			
+			getEvents();
+		}
+		else {
+		//	console.log('we already have events in storage')
+		setListEvents(check_storage);
+			let count = 0;
+			let random_image = check_storage.filter((elm) => {
+				if (!(elm.image.includes('image_not_')) && count < 5) {
+					count++;
+					return true;
+				}
+				return false;
+			})
+				.map(elm => elm.image);
+			setSlideList(random_image);
 
+		}
 	}, []);
 
 
 	const getEvents = async () => {
 		await downloadEvents();
-		setIsDataLoading(false);
-
 	}
 
 
@@ -37,8 +55,6 @@ export const Events = () => {
 				return res.json();
 			})
 			.then(response => {
-
-
 				let newArray = [...response.data.results];
 
 				let newArray2 = [];
@@ -49,12 +65,11 @@ export const Events = () => {
 					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
 					each_elm.description = (elm.description != null) ? elm.description.slice(0, 50) + '...' : 'Unfortunately there is no description on this one...'
 					each_elm.start = (elm.start == null) ? 'Unknown' : elm.start.slice(0, 11);
-
 					newArray2.push(each_elm);
 				})
 
-
 				setListEvents(newArray2);
+				sessionStorage.setItem("allevents", JSON.stringify(newArray2));
 				let random_image = [0];
 				let count = 0;
 				random_image = newArray2
@@ -67,8 +82,6 @@ export const Events = () => {
 					})
 					.map(elm => elm.image);
 				setSlideList(random_image);
-				console.log('We are testing our random image generator');
-				console.log(slideList);
 
 			})
 			.catch(error => console.error(error));
@@ -141,8 +154,6 @@ export const Events = () => {
 
 			</div>
 
-			{isDataLoading ? <Loader /> :
-
 				<div className="list_div">
 
 					{listEvents.map((element, index) =>
@@ -168,7 +179,6 @@ export const Events = () => {
 						</div>
 					)}
 				</div>
-			}
 		</div>
 
 	);

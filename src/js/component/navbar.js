@@ -17,7 +17,6 @@ export const Navbar = () => {
 	const [searchRes, setSearchRes] = useState([]);
 
 	function login_logout() {
-
 		if (context.currentUser.username == ' Login') {
 			navigate('/login');
 		}
@@ -47,15 +46,13 @@ export const Navbar = () => {
 
 		setSearchVal(val.target.value);
 		let search_val = val.target.value;
-		if (search_val.length < 2) {
-			let clear_res=[]
-			setSearchRes(clear_res);
-			return;
+		if (search_val.length==0) {
+			let clear_res=[];
+			setSearchRes(clear_res);	
 		}
 
 		else if(search_val.length%2==0 && search_val.length>1 ) {
-			search_characters(val.target.value);
-			
+				search_characters(val.target.value);	
 		}
 
 
@@ -77,25 +74,21 @@ export const Navbar = () => {
 
 					let newArray = [{ name: 'No matching characters found' }];
 					setSearchRes(newArray);
-
+				
 				}
 				return res.json();
 
 			})
 			.then(response => {
-
 				let newArray = [];
-
 				response.map((elm) => {
 					let each_elm = {}
 					each_elm.name = elm.name;
 					each_elm.id = elm.id;
-					each_elm.description = elm.description;
-					//	each_elm.image=
-					// each_elm.quote= elm.quote[0];	
+					each_elm.description = elm.description;	
 					newArray.push(each_elm);
 				})
-
+			
 					setSearchRes(newArray);
 			
 			})
@@ -110,15 +103,12 @@ export const Navbar = () => {
 
 	return (
 
+		<>
 
-		<div>
-
-
-
-			<nav class="navbar navbar-expand-lg navbar-light bg-dark w-100 mb-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-dark w-100">
 				<h1 class="brand_text">DyGeek</h1>
 				<img className="img_brand" src={imglink} />
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler menu-off" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse collapse_div" id="navbarNav">
@@ -126,10 +116,10 @@ export const Navbar = () => {
 
 						<div className="navbar-nav">
 							<ul className="ul_nav">
-								<li><span className="  nav_test" >News</span></li>
-								<li><span className=" nav_test" data-bs-toggle="collapse" onClick={() => navigate('/')}>Characters</span></li>
-								<li><span className="nav_link nav_test" onClick={() => navigate('/events')}>Events</span></li>
-								<li><span className="nav_link nav_test" onClick={() => navigate('/series')}>Series</span></li>
+								<li><span className="  nav_test" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >News</span></li>
+								<li><span className=" nav_test" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onClick={() => navigate('/')}>Characters</span></li>
+								<li><span className="nav_link nav_test" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onClick={() => navigate('/events')}>Events</span></li>
+								<li><span className="nav_link nav_test" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onClick={() => navigate('/series')}>Series</span></li>
 							</ul>
 
 						</div>
@@ -141,7 +131,7 @@ export const Navbar = () => {
 									<input class="input-search" placeholder="Search your character" type="search" value={searchVal} onChange={(e) => search_function(e)} />
 								</div>
 
-								<div className={searchVal.length > 2 ? "search_r_div" : "no_search"}>
+								<div className={searchVal.length > 1 ? "search_r_div" : "no_search"}>
 
 									{searchRes.map((elm, ind) =>
 										<span key={ind} className="dropdown-item text-light" onClick={() => lookup_character()} >{elm.name}</span>
@@ -149,7 +139,7 @@ export const Navbar = () => {
 
 								</div>
 							</div>
-							<button className="button-81 mx-3" type="submit" onClick={() => login_logout()}>
+							<button className="button-81 mx-3" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" type="submit" onClick={() => login_logout()}>
 								<i className={context.currentUser.username == ' Login' ? "fa-regular fa-user" : "fa-solid fa-right-from-bracket"} ></i>{context.currentUser.username}</button>
 
 						</div>
@@ -163,7 +153,7 @@ export const Navbar = () => {
 
 
 
-		</div>
+		</>
 
 
 

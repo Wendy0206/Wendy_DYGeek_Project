@@ -35,8 +35,10 @@ export const Single = () => {
 
 	return (
 		<div className="list_div ">
+{context.favList.length < 1 ? <div className="nothing_div"><h1>No favorites to show here. </h1></div>
 
-{context.favList.map((element,ind)=>
+:
+context.favList.map((element,ind)=>
 
 
 <div key={ind} className="card card_size" >

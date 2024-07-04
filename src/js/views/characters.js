@@ -13,19 +13,42 @@ export const Characters = () => {
 	const context = useContext(AppContext);
 	const navigate = useNavigate();
 	const [listC, setListC] = useState([]);
-	const [slideList, setSlideList] = useState([]);
+	const [slideList, setSlideList] = useState(['https://cdn.marvel.com/content/1x/dpool2024004_marvelvsalien.jpg',
+		'https://cdn.marvel.com/content/1x/uncx2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/aven2023018_cover.jpg',
+		'https://cdn.marvel.com/content/1x/xfact2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/phx2024002_cov.jpg']);
 	const [isDataLoading, setIsDataLoading] = useState(false);
 
+
+
 	useEffect(() => {
-
-		getCharacters();
-
+		//sessionStorage.clear();
+		let check_storage = JSON.parse(sessionStorage.getItem('allcharacters'));
+		if (!check_storage) {
+			console.log('this was triggered');
+			getCharacters();
+		} else {
+			//console.log('we already have characters in storage')
+			setListC(check_storage);
+			let count = 0;
+			let random_image = check_storage.filter((elm) => {
+				if (!(elm.image.includes('image_not_')) && count < 5) {
+					count++;
+					return true;
+				}
+				return false;
+			})
+				.map(elm => elm.image);
+			setSlideList(random_image);
+		}
 	}, []);
+
+
 
 	const getCharacters = async () => {
 		try {
 			setIsDataLoading(true);
 			await downloadCharacters();
+
 		} catch (error) {
 			console.log(error);
 		} finally {
@@ -51,7 +74,6 @@ export const Characters = () => {
 					each_elm.name = elm.name;
 					each_elm.id = elm.id;
 					each_elm.image = elm.thumbnail.path + '.' + elm.thumbnail.extension;
-
 					each_elm.comics = elm.comics.available;
 					each_elm.description = (elm.description.length > 5) ? elm.description.slice(0, 40) + '...' : 'Unfortunately there is no description here...'
 					each_elm.series = elm.series.available;
@@ -71,6 +93,8 @@ export const Characters = () => {
 					.map(elm => elm.image);
 				setSlideList(random_image);
 				setListC(newArray2);
+				sessionStorage.setItem("allcharacters", JSON.stringify(newArray2));
+
 
 			})
 			.catch(error => { console.error(error); return false; });
@@ -150,8 +174,7 @@ export const Characters = () => {
 				<button className="fav_button" onClick={() => navigate("/single")}>Favorites <span className="suptest">{context.favList.length}</span> </button>
 
 			</div>
-			{isDataLoading ? <TailSpin color="red" radius={"8px"} /> :
-				<>
+			
 					<div className="slideshow3">
 						<img className="img_sl" src={slideList[4]} />
 						<img className=" img_sl" src={slideList[3]} />
@@ -188,7 +211,7 @@ export const Characters = () => {
 							</div>
 						)}
 					</div>
-				</>}
+				
 		</div>
 
 	);
