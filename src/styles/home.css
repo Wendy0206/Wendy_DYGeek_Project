@@ -21,7 +21,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 15px;
-  height: 75vh;
+  min-height: 75vh;
   width: 100%;
   gap: 20px;
 }

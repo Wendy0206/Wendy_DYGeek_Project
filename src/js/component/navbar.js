@@ -104,7 +104,6 @@ export const Navbar = () => {
 	return (
 
 		<>
-
 			<nav class="navbar navbar-expand-lg navbar-light bg-dark w-100">
 				<h1 class="brand_text">DyGeek</h1>
 				<img className="img_brand" src={imglink} />
@@ -149,9 +148,6 @@ export const Navbar = () => {
 
 				</div>
 			</nav>
-
-
-
 
 		</>
 

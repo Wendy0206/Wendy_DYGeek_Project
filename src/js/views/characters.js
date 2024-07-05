@@ -16,7 +16,7 @@ export const Characters = () => {
 	const [slideList, setSlideList] = useState(['https://cdn.marvel.com/content/1x/dpool2024004_marvelvsalien.jpg',
 		'https://cdn.marvel.com/content/1x/uncx2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/aven2023018_cover.jpg',
 		'https://cdn.marvel.com/content/1x/xfact2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/phx2024002_cov.jpg']);
-	const [isDataLoading, setIsDataLoading] = useState(false);
+
 
 
 
@@ -46,14 +46,11 @@ export const Characters = () => {
 
 	const getCharacters = async () => {
 		try {
-			setIsDataLoading(true);
 			await downloadCharacters();
 
 		} catch (error) {
 			console.log(error);
-		} finally {
-			setIsDataLoading(false);
-		}
+		} 
 	}
 
 

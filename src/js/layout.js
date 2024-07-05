@@ -51,7 +51,7 @@ const Layout = () => {
 							<Route path="/single" element={<Single />} />
 							<Route path="*" element={<h1 className="nothing_to_show">Not found!</h1>} />
 						</Routes>
-						<Footer />
+						<Footer/>
 					</ScrollToTop>
 				</BrowserRouter>
 			</AppContext.Provider>

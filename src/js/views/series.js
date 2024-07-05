@@ -16,8 +16,7 @@ export const Series = () => {
 	const [slideList, setSlideList] = useState(['https://cdn.marvel.com/content/1x/dpool2024004_marvelvsalien.jpg',
 		'https://cdn.marvel.com/content/1x/uncx2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/aven2023018_cover.jpg',
 		'https://cdn.marvel.com/content/1x/xfact2024002_cover.jpg', 'https://cdn.marvel.com/content/1x/phx2024002_cov.jpg']);
-	const [isDataLoading, setIsDataLoading] = useState(false);
-
+	
 
 	useEffect(() => {
 
@@ -47,7 +46,7 @@ export const Series = () => {
 
 	const getSeries = async () => {
 		await downloadSeries();
-		setIsDataLoading(false);
+		
 	}
 
 
@@ -134,19 +133,12 @@ export const Series = () => {
 
 	return (
 		
-
 				<div className="container catalog_div">
 
 					<div className=" d-flex justify-content-between mt-3">
 						<div className="dropdown text-start ">
-							<button
-								className="fav_button px-3 dropdown-toggle"
-								type="button"
-								id="dropdownMenuButton"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-
+							<button	className="fav_button px-3 dropdown-toggle"
+								type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 								Filter
 							</button>
 							<ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
