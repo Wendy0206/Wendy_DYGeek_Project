@@ -21,25 +21,27 @@ export const Characters = () => {
 
 
 	useEffect(() => {
+		getCharacters();
+
 		//sessionStorage.clear();
-		let check_storage = JSON.parse(sessionStorage.getItem('allcharacters'));
-		if (!check_storage) {
-			console.log('this was triggered');
-			getCharacters();
-		} else {
-			//console.log('we already have characters in storage')
-			setListC(check_storage);
-			let count = 0;
-			let random_image = check_storage.filter((elm) => {
-				if (!(elm.image.includes('image_not_')) && count < 5) {
-					count++;
-					return true;
-				}
-				return false;
-			})
-				.map(elm => elm.image);
-			setSlideList(random_image);
-		}
+		// let check_storage = JSON.parse(sessionStorage.getItem('allcharacters'));
+		// if (!check_storage) {
+		// 	console.log('this was triggered');
+		
+		// } else {
+		// 	//console.log('we already have characters in storage')
+		// 	setListC(check_storage);
+		// 	let count = 0;
+		// 	let random_image = check_storage.filter((elm) => {
+		// 		if (!(elm.image.includes('image_not_')) && count < 5) {
+		// 			count++;
+		// 			return true;
+		// 		}
+		// 		return false;
+		// 	})
+		// 		.map(elm => elm.image);
+		// 	setSlideList(random_image);
+		// }
 	}, []);
 
 

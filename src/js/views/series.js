@@ -20,25 +20,27 @@ export const Series = () => {
 
 	useEffect(() => {
 
-		let check_storage = JSON.parse(sessionStorage.getItem('allseries'));
-		if (!check_storage) {
-		
-			getSeries();
-		} else {
-			//console.log('we already have series in storage')
-			setListSeries(check_storage);
+		getSeries();
 
-			let count = 0;
-			let random_image = check_storage.filter((elm) => {
-				if (!(elm.image.includes('image_not_')) && count < 5) {
-					count++;
-					return true;
-				}
-				return false;
-			})
-				.map(elm => elm.image);
-			setSlideList(random_image);
-		}
+		// let check_storage = JSON.parse(sessionStorage.getItem('allseries'));
+		// if (!check_storage) {
+		
+			
+		// } else {
+		// 	//console.log('we already have series in storage')
+		// 	setListSeries(check_storage);
+
+		// 	let count = 0;
+		// 	let random_image = check_storage.filter((elm) => {
+		// 		if (!(elm.image.includes('image_not_')) && count < 5) {
+		// 			count++;
+		// 			return true;
+		// 		}
+		// 		return false;
+		// 	})
+		// 		.map(elm => elm.image);
+		// 	setSlideList(random_image);
+		// }
 	}, []);
 
 
